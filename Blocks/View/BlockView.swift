@@ -8,14 +8,14 @@
 
 import UIKit
 
-class Block: UIView {
+class BlockView: UIView {
     static let sideLength: CGFloat = 100
     
     let color: UIColor
     
-    init() {
-        self.color = UIColor(hue: .random(in: 0...1), saturation: 0.8, brightness: 0.8, alpha: 1)
-        super.init(frame: CGRect(x: 0, y: 0, width: Block.sideLength, height: Block.sideLength))
+    init(color: UIColor) {
+        self.color = color
+        super.init(frame: CGRect(x: 0, y: 0, width: BlockView.sideLength, height: BlockView.sideLength))
         self.backgroundColor = self.color
     }
     
