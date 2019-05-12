@@ -17,17 +17,19 @@ class Document: UIDocument {
         // Encode your document with an instance of NSData or NSFileWrapper
         
         let jsonEncoder = JSONEncoder()
+        jsonEncoder.outputFormatting = .prettyPrinted
         let data = try jsonEncoder.encode(blocks)
-        print("contents(forType:) DATA: \(String(data: data, encoding: .utf8) ?? nil)")
+        print("contents(forType:) DEBUG: \(blocksDebugString(blocks: blocks))")
         return data
     }
     
     override func load(fromContents contents: Any, ofType typeName: String?) throws {
         // Load your document from contents
         let data = contents as! Data
-        print("load(fromContents:) DATA: \(String(data: data, encoding: .utf8) ?? nil)")
         let jsonDecoder = JSONDecoder()
-        blocks = try jsonDecoder.decode([Block].self, from: data)
+        let decodedBlocks = try jsonDecoder.decode([Block].self, from: data)
+        print("load(fromContents:) DEBUG: \(blocksDebugString(blocks: decodedBlocks))")
+        blocks = decodedBlocks
     }
     
     // MARK: Block manipulation
@@ -41,5 +43,11 @@ class Document: UIDocument {
     }
     
     
+}
+
+extension Document {
+    private func blocksDebugString(blocks: [Block]) -> String {
+        return blocks.map{$0.identifier.uuidString}.reduce("Count: \(blocks.count), UUIDs: {", {$0 + $1 + ", "}) + "}"
+    }
 }
 

@@ -32,8 +32,13 @@ class DocumentViewController: UIViewController {
         })
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        navigationItem.title = documentStateString()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.documentStateChanged), name: UIDocument.stateChangedNotification, object: nil)
+    }
+    
     @IBAction func dismissDocumentViewController() {
-        print("DismissDocumentViewController \(self.document.blocks)")
+        print("DismissDocumentViewController")
         self.document.close { (success) in
             self.dismiss(animated: true, completion: nil)
         }
@@ -57,6 +62,37 @@ class DocumentViewController: UIViewController {
         document.addBlock(block)
         document.updateChangeCount(.done)
         
+    }
+    
+    @objc func documentStateChanged() {
+        navigationItem.title = documentStateString()
+        print("documentStateChanged: \(documentStateString())")
+    }
+    
+    func documentStateString() -> String {
+        var str = ""
+        let state = document.documentState
+        
+        if state.contains(.normal) {
+            str += "Normal, "
+        }
+        if state.contains(.closed) {
+            str += "Closed, "
+        }
+        if state.contains(.inConflict) {
+            str += "In conflict, "
+        }
+        if state.contains(.savingError) {
+            str += "Saving error, "
+        }
+        if state.contains(.editingDisabled) {
+            str += "Editing disabled, "
+        }
+        if state.contains(.progressAvailable) {
+            str += "Progress available, "
+        }
+        str.removeLast(2)
+        return str
     }
     
 }

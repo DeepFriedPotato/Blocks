@@ -33,7 +33,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
         let tempDir = FileManager.default.temporaryDirectory
-        let newDocumentURL = tempDir.appendingPathComponent("Blank").appendingPathExtension("blocks")
+        let newDocumentURL = tempDir.appendingPathComponent("Untitled").appendingPathExtension("blocks")
         let newDocument = Document(fileURL: newDocumentURL)
         
         newDocument.save(to: newDocumentURL, for: .forCreating) { (saveSuccess) in
