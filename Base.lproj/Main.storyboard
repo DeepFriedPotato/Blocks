@@ -41,11 +41,18 @@
                                 <action selector="dismissDocumentViewController" destination="M2k-L8-Olo" id="S08-YS-DuV"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="4x4-8A-Nwf">
-                            <connections>
-                                <action selector="addButtonPressed:" destination="M2k-L8-Olo" id="BKL-zf-dm6"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="4x4-8A-Nwf">
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="M2k-L8-Olo" id="BKL-zf-dm6"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Debug" id="2SK-zd-Ymh">
+                                <connections>
+                                    <action selector="debugButtonPressed:" destination="M2k-L8-Olo" id="Uxr-IV-10T"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rl9-ES-qQn" userLabel="First Responder" sceneMemberID="firstResponder"/>

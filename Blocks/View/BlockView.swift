@@ -9,7 +9,7 @@
 import UIKit
 
 class BlockView: UIView {
-    static let sideLength: CGFloat = 100
+    static let sideLength: CGFloat = 50
     
     let color: UIColor
     

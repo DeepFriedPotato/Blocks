@@ -9,7 +9,7 @@
 import Foundation
 import CoreGraphics
 
-struct Block {
+struct Block: Equatable {
     let color: Color
     var center: CGPoint
     let identifier: UUID

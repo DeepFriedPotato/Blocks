@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Color {
+struct Color: Equatable {
     let red: Double
     let green: Double
     let blue: Double
