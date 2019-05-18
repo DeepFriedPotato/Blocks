@@ -32,7 +32,7 @@ class DocumentViewController: UIViewController {
                 
                 NotificationCenter.default.addObserver(self, selector: #selector(self.documentStateChanged), name: UIDocument.stateChangedNotification, object: nil)
                 NotificationCenter.default.addObserver(self, selector: #selector(self.blocksChanged), name: Document.blocksChangedNotification, object: nil)
-                self.navigationItem.title = self.document.documentStateString()
+                self.updateNavigationBarTitle()
                 
                 if self.document.documentState.contains(.inConflict) {
                     self.document.resolveConflict()
@@ -77,13 +77,6 @@ extension DocumentViewController {
         
         let randomColor = Color.random()
         
-        if document.documentState.contains(.editingDisabled) {
-            let alert = UIAlertController(title: "Editing disabled!", message: "What a bummer", preferredStyle: UIAlertController.Style.alert)
-            alert.view.backgroundColor = randomColor.uiColor
-            let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
-            alert.addAction(alertAction)
-            present(alert, animated: true)
-        }
         
         // Update View
         let blockView = BlockView(color: randomColor.uiColor)
@@ -99,6 +92,7 @@ extension DocumentViewController {
         print("❇️Add button Pressed. New block UUID: \(block.identifier). Time: \(Date())")
         document.addBlock(block)
         
+        updateNavigationBarTitle()
     }
     
     @IBAction func debugButtonPressed(_ sender: UIBarButtonItem) {
@@ -169,6 +163,7 @@ extension DocumentViewController {
     @objc func blocksChanged(notfication: Notification) {
         print("DocumentVC: blocksChanged notification received. Changing UI.")
         let blockChanges = document.getBlockChanges()
+        updateNavigationBarTitle()
         for blockChange in blockChanges {
             switch blockChange {
             case .insert(let block, let index):
@@ -186,8 +181,12 @@ extension DocumentViewController {
 // MARK: Document state
 extension DocumentViewController {
     
+    func updateNavigationBarTitle() {
+        navigationItem.title = "[\(document.getNumberOfBlocks())] \(document.documentStateString())"
+    }
+    
     @objc func documentStateChanged(notification: Notification) {
-        navigationItem.title = document.documentStateString()
+        updateNavigationBarTitle()
         
     }
     

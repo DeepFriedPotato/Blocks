@@ -16,7 +16,7 @@ struct Color: Equatable {
 
 extension Color {
     var uiColor: UIColor {
-        return UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: 1.0)
+        return UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: 0.7)
     }
     
     static func random() -> Color {

@@ -26,7 +26,7 @@ class Document: UIDocument {
     @objc private func documentStateChanged(notification: Notification) {
         print()
         print(" 🔀documentStateChanged: \(documentStateString())           [\(hasUnsavedChanges ? "hasUnsavedChanges💾" : "nothingToSave🤷‍♂️")]")
-        if shouldUpdateChangeCountOnNextStateChange {
+        if shouldUpdateChangeCountOnNextStateChange && !documentState.contains(.editingDisabled){
             print("   🙋‍♂️updateChangeCount(.done) due to shouldUpdateChangeCountOnNextStateChange")
             updateChangeCount(.done)
             shouldUpdateChangeCountOnNextStateChange = false
@@ -79,9 +79,11 @@ class Document: UIDocument {
                 blocks = merged
                 // Send notification
                 NotificationCenter.default.post(name: Document.blocksChangedNotification, object: nil)
-                shouldUpdateChangeCountOnNextStateChange = true
-                print("   (🙋‍♂️)scheduled to updateChangeCount(.done) in load. blockChange is not empty")
                 
+                if (decodedBlocks != merged) {
+                    shouldUpdateChangeCountOnNextStateChange = true
+                    print("   (🙋‍♂️)scheduled to updateChangeCount(.done) in load. blockChange is not empty")
+                }
             }
             
             
@@ -119,6 +121,10 @@ extension Document {
     
     func getBlockChanges() -> [BlockChange] {
         return blockChanges
+    }
+    
+    func getNumberOfBlocks() -> Int {
+        return blocks.count
     }
 }
 
@@ -183,11 +189,8 @@ extension Document {
             // Send notification
             NotificationCenter.default.post(name: Document.blocksChangedNotification, object: nil)
             blocks = merged // Only update blocks if there are changes
-            print("   🙋‍♂️updateChangeCount(.done) inside merge. blockChanges is not empty")
-            if (documentState.contains(.editingDisabled)) {
-                print("   ‼️‼️Attempting to updateChangeCount when .editingDisabled‼️‼️")
-            }
-            updateChangeCount(.done)
+            shouldUpdateChangeCountOnNextStateChange = true
+            print("   (🙋‍♂️)scheduled to updateChangeCount(.done) in load. blockChange is not empty")
         }
         
         
