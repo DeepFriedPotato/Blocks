@@ -22,4 +22,9 @@ class BlockView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("Not implemented")
     }
+    
+    // For UIMenuController
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
 }

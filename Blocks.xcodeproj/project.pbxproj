@@ -31,10 +31,12 @@
 		B0AE9FED228BAE0B000C8092 /* Patch+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FDE228BAE0B000C8092 /* Patch+Sort.swift */; };
 		B0AE9FEE228BAE0B000C8092 /* ExtendedPatch+Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FDF228BAE0B000C8092 /* ExtendedPatch+Apply.swift */; };
 		B0AE9FEF228BAE0B000C8092 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FE0228BAE0B000C8092 /* LinkedList.swift */; };
+		B0CA1F6A229037D8008A7E07 /* Array Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CA1F69229037D8008A7E07 /* Array Extensions.swift */; };
 		B0E0E2622287E544007E95D1 /* BlockChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E0E2612287E544007E95D1 /* BlockChange.swift */; };
 		B0EB13A522850091002C326A /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13A422850091002C326A /* BlockView.swift */; };
 		B0EB13E8228562F4002C326A /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13E7228562F4002C326A /* Block.swift */; };
 		B0EB13EA22856CED002C326A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13E922856CED002C326A /* Color.swift */; };
+		B0F3EA2B228FF82F00C968E7 /* DeletedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F3EA2A228FF82F00C968E7 /* DeletedBlock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,10 +87,12 @@
 		B0AE9FDE228BAE0B000C8092 /* Patch+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Patch+Sort.swift"; sourceTree = "<group>"; };
 		B0AE9FDF228BAE0B000C8092 /* ExtendedPatch+Apply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExtendedPatch+Apply.swift"; sourceTree = "<group>"; };
 		B0AE9FE0228BAE0B000C8092 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		B0CA1F69229037D8008A7E07 /* Array Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array Extensions.swift"; sourceTree = "<group>"; };
 		B0E0E2612287E544007E95D1 /* BlockChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockChange.swift; sourceTree = "<group>"; };
 		B0EB13A422850091002C326A /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		B0EB13E7228562F4002C326A /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		B0EB13E922856CED002C326A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		B0F3EA2A228FF82F00C968E7 /* DeletedBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedBlock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +212,7 @@
 			children = (
 				B0462B102282BC67000522BB /* Document.swift */,
 				B0EB13E7228562F4002C326A /* Block.swift */,
+				B0F3EA2A228FF82F00C968E7 /* DeletedBlock.swift */,
 				B0E0E2612287E544007E95D1 /* BlockChange.swift */,
 			);
 			path = Model;
@@ -225,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				B0EB13E922856CED002C326A /* Color.swift */,
+				B0CA1F69229037D8008A7E07 /* Array Extensions.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -362,6 +368,7 @@
 			files = (
 				B0462B112282BC67000522BB /* Document.swift in Sources */,
 				B0AE9FE4228BAE0B000C8092 /* Diff+UIKit.swift in Sources */,
+				B0CA1F6A229037D8008A7E07 /* Array Extensions.swift in Sources */,
 				B0AE9FE2228BAE0B000C8092 /* ExtendedPatch.swift in Sources */,
 				B0AE9FE5228BAE0B000C8092 /* Diff.swift in Sources */,
 				B0AE9FE7228BAE0B000C8092 /* GenericPatch.swift in Sources */,
@@ -375,6 +382,7 @@
 				B0EB13A522850091002C326A /* BlockView.swift in Sources */,
 				B0EB13E8228562F4002C326A /* Block.swift in Sources */,
 				B0AE9FEA228BAE0B000C8092 /* NestedBatchUpdate.swift in Sources */,
+				B0F3EA2B228FF82F00C968E7 /* DeletedBlock.swift in Sources */,
 				B0AE9FEC228BAE0B000C8092 /* Patch+Apply.swift in Sources */,
 				B0E0E2622287E544007E95D1 /* BlockChange.swift in Sources */,
 				B0462B0D2282BC67000522BB /* DocumentBrowserViewController.swift in Sources */,

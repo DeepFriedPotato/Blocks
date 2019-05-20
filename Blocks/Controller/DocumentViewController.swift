@@ -12,7 +12,7 @@ class DocumentViewController: UIViewController {
     
     var document: Document!
     
-    
+    var lastTappedBlockView: BlockView?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,6 +27,8 @@ class DocumentViewController: UIViewController {
                     let blockView = BlockView(color: block.color.uiColor)
                     blockView.center = block.center
                     self.view.addSubview(blockView)
+                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.blockTapped))
+                    blockView.addGestureRecognizer(tap)
                 })
                 print("   " + self.document.blocksDebugString())
                 
@@ -86,6 +88,9 @@ extension DocumentViewController {
         blockView.center = randomCenter
         view.addSubview(blockView)
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.blockTapped))
+        blockView.addGestureRecognizer(tap)
+        
         // Update Model
         let block = Block.init(color: randomColor, center: randomCenter, identifier: UUID(), creationDate: Date())
         print()
@@ -96,6 +101,7 @@ extension DocumentViewController {
     }
     
     @IBAction func debugButtonPressed(_ sender: UIBarButtonItem) {
+
         print("==DEBUG==")
         print("NSFileVersion CURRENT")
         let currentVersion = NSFileVersion.currentVersionOfItem(at: document.fileURL)!
@@ -155,6 +161,37 @@ extension DocumentViewController {
         
         print("==END DEBUG==")
     }
+    
+    @objc func blockTapped(gr: UITapGestureRecognizer) {
+        print("blockTapped")
+        guard let blockView = gr.view as? BlockView else { fatalError() }
+        
+        blockView.becomeFirstResponder()
+        
+        let menu = UIMenuController.shared
+        let deleteMenuItem = UIMenuItem(title: "Delete", action: #selector(self.deleteMenuItemTapped))
+        menu.menuItems = [deleteMenuItem]
+        menu.setTargetRect(blockView.frame, in: view)
+        menu.setMenuVisible(true, animated: true)
+        
+        lastTappedBlockView = blockView
+        
+        
+    }
+    
+    @objc func deleteMenuItemTapped() {
+        
+        guard let lastTappedBlockView = lastTappedBlockView else { fatalError() }
+        guard let index = view.subviews.firstIndex(of: lastTappedBlockView) else { fatalError() }
+        guard let block = document.getBlock(at: index) else { fatalError() }
+        print("❌deleteMenuItemTapped index=\(index) UUID=\(block.identifier)")
+        document.deleteBlock(at: index)
+        
+        lastTappedBlockView.removeFromSuperview()
+        self.lastTappedBlockView = nil
+        
+        updateNavigationBarTitle()
+    }
 }
 
 // MARK: Block changes
@@ -170,8 +207,10 @@ extension DocumentViewController {
                 let blockView = BlockView(color: block.color.uiColor)
                 blockView.center = block.center
                 self.view.insertSubview(blockView, at: index)
+                let tap = UITapGestureRecognizer(target: self, action: #selector(self.blockTapped))
+                blockView.addGestureRecognizer(tap)
             case .delete(let index):
-                fatalError()
+                self.view.subviews[index].removeFromSuperview()
                 //self.view.subviews.value(at: index)?.removeFromSuperview()
             }
         }

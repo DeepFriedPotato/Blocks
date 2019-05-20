@@ -18,8 +18,6 @@ enum BlockChange: CustomDebugStringConvertible {
             return "Insert(\(block.identifier), \(index))"
         case .delete(let index):
             return "Delete(\(index))"
-        default:
-            return ""
         }
     }
 }
