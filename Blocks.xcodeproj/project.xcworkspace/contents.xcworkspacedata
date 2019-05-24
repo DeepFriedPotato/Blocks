@@ -2,6 +2,51 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Blocks.xcodeproj">
+      location = "group:../Blocks/Sources/Differ/BatchUpdate.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Blocks/Sources/Differ/Diff.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Blocks/Sources/Differ/Diff+AppKit.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Blocks/Sources/Differ/Diff+UIKit.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Blocks/Sources/Differ/ExtendedDiff.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Blocks/Sources/Differ/ExtendedPatch.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Blocks/Sources/Differ/ExtendedPatch+Apply.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Blocks/Sources/Differ/GenericPatch.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Blocks/Sources/Differ/LinkedList.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Blocks/Sources/Differ/NestedBatchUpdate.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Blocks/Sources/Differ/NestedDiff.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Blocks/Sources/Differ/NestedExtendedDiff.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Blocks/Sources/Differ/Patch.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Blocks/Sources/Differ/Patch+Apply.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Blocks/Sources/Differ/Patch+Sort.swift">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

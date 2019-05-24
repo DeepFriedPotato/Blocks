@@ -13,6 +13,16 @@ class BlockView: UIView {
     
     let color: UIColor
     
+    var usesRoundedCorners: Bool = false {
+        didSet {
+            if usesRoundedCorners {
+                self.layer.cornerRadius = 15
+            } else {
+                self.layer.cornerRadius = 0
+            }
+        }
+    }
+    
     init(color: UIColor) {
         self.color = color
         super.init(frame: CGRect(x: 0, y: 0, width: BlockView.sideLength, height: BlockView.sideLength))

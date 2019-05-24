@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B03D7D122292CBBA00E3ACA1 /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D032292CBB900E3ACA1 /* Diff.swift */; };
+		B03D7D132292CBBA00E3ACA1 /* NestedBatchUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D042292CBB900E3ACA1 /* NestedBatchUpdate.swift */; };
+		B03D7D142292CBBA00E3ACA1 /* Patch+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D052292CBB900E3ACA1 /* Patch+Sort.swift */; };
+		B03D7D152292CBBA00E3ACA1 /* NestedDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D062292CBB900E3ACA1 /* NestedDiff.swift */; };
+		B03D7D162292CBBA00E3ACA1 /* GenericPatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D072292CBB900E3ACA1 /* GenericPatch.swift */; };
+		B03D7D172292CBBA00E3ACA1 /* ExtendedPatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D082292CBB900E3ACA1 /* ExtendedPatch.swift */; };
+		B03D7D182292CBBA00E3ACA1 /* Diff+AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D092292CBB900E3ACA1 /* Diff+AppKit.swift */; };
+		B03D7D192292CBBA00E3ACA1 /* BatchUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0A2292CBB900E3ACA1 /* BatchUpdate.swift */; };
+		B03D7D1A2292CBBA00E3ACA1 /* Patch+Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0B2292CBB900E3ACA1 /* Patch+Apply.swift */; };
+		B03D7D1B2292CBBA00E3ACA1 /* NestedExtendedDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0C2292CBB900E3ACA1 /* NestedExtendedDiff.swift */; };
+		B03D7D1C2292CBBA00E3ACA1 /* Patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0D2292CBB900E3ACA1 /* Patch.swift */; };
+		B03D7D1D2292CBBA00E3ACA1 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0E2292CBBA00E3ACA1 /* LinkedList.swift */; };
+		B03D7D1E2292CBBA00E3ACA1 /* Diff+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0F2292CBBA00E3ACA1 /* Diff+UIKit.swift */; };
+		B03D7D1F2292CBBA00E3ACA1 /* ExtendedPatch+Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D102292CBBA00E3ACA1 /* ExtendedPatch+Apply.swift */; };
+		B03D7D202292CBBA00E3ACA1 /* ExtendedDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D112292CBBA00E3ACA1 /* ExtendedDiff.swift */; };
 		B0462B0B2282BC67000522BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0462B0A2282BC67000522BB /* AppDelegate.swift */; };
 		B0462B0D2282BC67000522BB /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0462B0C2282BC67000522BB /* DocumentBrowserViewController.swift */; };
 		B0462B0F2282BC67000522BB /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0462B0E2282BC67000522BB /* DocumentViewController.swift */; };
@@ -16,21 +31,6 @@
 		B0462B192282BC69000522BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0462B172282BC69000522BB /* LaunchScreen.storyboard */; };
 		B0462B242282BC69000522BB /* BlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0462B232282BC69000522BB /* BlocksTests.swift */; };
 		B0462B2F2282BC69000522BB /* BlocksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0462B2E2282BC69000522BB /* BlocksUITests.swift */; };
-		B0AE9FE1228BAE0B000C8092 /* NestedExtendedDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FD2228BAE0B000C8092 /* NestedExtendedDiff.swift */; };
-		B0AE9FE2228BAE0B000C8092 /* ExtendedPatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FD3228BAE0B000C8092 /* ExtendedPatch.swift */; };
-		B0AE9FE3228BAE0B000C8092 /* ExtendedDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FD4228BAE0B000C8092 /* ExtendedDiff.swift */; };
-		B0AE9FE4228BAE0B000C8092 /* Diff+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FD5228BAE0B000C8092 /* Diff+UIKit.swift */; };
-		B0AE9FE5228BAE0B000C8092 /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FD6228BAE0B000C8092 /* Diff.swift */; };
-		B0AE9FE6228BAE0B000C8092 /* NestedDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FD7228BAE0B000C8092 /* NestedDiff.swift */; };
-		B0AE9FE7228BAE0B000C8092 /* GenericPatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FD8228BAE0B000C8092 /* GenericPatch.swift */; };
-		B0AE9FE8228BAE0B000C8092 /* Patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FD9228BAE0B000C8092 /* Patch.swift */; };
-		B0AE9FE9228BAE0B000C8092 /* Diff+AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FDA228BAE0B000C8092 /* Diff+AppKit.swift */; };
-		B0AE9FEA228BAE0B000C8092 /* NestedBatchUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FDB228BAE0B000C8092 /* NestedBatchUpdate.swift */; };
-		B0AE9FEB228BAE0B000C8092 /* BatchUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FDC228BAE0B000C8092 /* BatchUpdate.swift */; };
-		B0AE9FEC228BAE0B000C8092 /* Patch+Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FDD228BAE0B000C8092 /* Patch+Apply.swift */; };
-		B0AE9FED228BAE0B000C8092 /* Patch+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FDE228BAE0B000C8092 /* Patch+Sort.swift */; };
-		B0AE9FEE228BAE0B000C8092 /* ExtendedPatch+Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FDF228BAE0B000C8092 /* ExtendedPatch+Apply.swift */; };
-		B0AE9FEF228BAE0B000C8092 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AE9FE0228BAE0B000C8092 /* LinkedList.swift */; };
 		B0CA1F6A229037D8008A7E07 /* Array Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CA1F69229037D8008A7E07 /* Array Extensions.swift */; };
 		B0E0E2622287E544007E95D1 /* BlockChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E0E2612287E544007E95D1 /* BlockChange.swift */; };
 		B0EB13A522850091002C326A /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13A422850091002C326A /* BlockView.swift */; };
@@ -57,6 +57,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B03D7D022292CA5500E3ACA1 /* Diff.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = Diff.playground; path = Blocks/Sources/Differ/Diff.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		B03D7D032292CBB900E3ACA1 /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
+		B03D7D042292CBB900E3ACA1 /* NestedBatchUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedBatchUpdate.swift; sourceTree = "<group>"; };
+		B03D7D052292CBB900E3ACA1 /* Patch+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Patch+Sort.swift"; sourceTree = "<group>"; };
+		B03D7D062292CBB900E3ACA1 /* NestedDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedDiff.swift; sourceTree = "<group>"; };
+		B03D7D072292CBB900E3ACA1 /* GenericPatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericPatch.swift; sourceTree = "<group>"; };
+		B03D7D082292CBB900E3ACA1 /* ExtendedPatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedPatch.swift; sourceTree = "<group>"; };
+		B03D7D092292CBB900E3ACA1 /* Diff+AppKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Diff+AppKit.swift"; sourceTree = "<group>"; };
+		B03D7D0A2292CBB900E3ACA1 /* BatchUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchUpdate.swift; sourceTree = "<group>"; };
+		B03D7D0B2292CBB900E3ACA1 /* Patch+Apply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Patch+Apply.swift"; sourceTree = "<group>"; };
+		B03D7D0C2292CBB900E3ACA1 /* NestedExtendedDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedExtendedDiff.swift; sourceTree = "<group>"; };
+		B03D7D0D2292CBB900E3ACA1 /* Patch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patch.swift; sourceTree = "<group>"; };
+		B03D7D0E2292CBBA00E3ACA1 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		B03D7D0F2292CBBA00E3ACA1 /* Diff+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Diff+UIKit.swift"; sourceTree = "<group>"; };
+		B03D7D102292CBBA00E3ACA1 /* ExtendedPatch+Apply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExtendedPatch+Apply.swift"; sourceTree = "<group>"; };
+		B03D7D112292CBBA00E3ACA1 /* ExtendedDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedDiff.swift; sourceTree = "<group>"; };
 		B0462B072282BC67000522BB /* Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0462B0A2282BC67000522BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0462B0C2282BC67000522BB /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
@@ -72,21 +88,6 @@
 		B0462B2A2282BC69000522BB /* BlocksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0462B2E2282BC69000522BB /* BlocksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksUITests.swift; sourceTree = "<group>"; };
 		B0462B302282BC69000522BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B0AE9FD2228BAE0B000C8092 /* NestedExtendedDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedExtendedDiff.swift; sourceTree = "<group>"; };
-		B0AE9FD3228BAE0B000C8092 /* ExtendedPatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedPatch.swift; sourceTree = "<group>"; };
-		B0AE9FD4228BAE0B000C8092 /* ExtendedDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedDiff.swift; sourceTree = "<group>"; };
-		B0AE9FD5228BAE0B000C8092 /* Diff+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Diff+UIKit.swift"; sourceTree = "<group>"; };
-		B0AE9FD6228BAE0B000C8092 /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
-		B0AE9FD7228BAE0B000C8092 /* NestedDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedDiff.swift; sourceTree = "<group>"; };
-		B0AE9FD8228BAE0B000C8092 /* GenericPatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericPatch.swift; sourceTree = "<group>"; };
-		B0AE9FD9228BAE0B000C8092 /* Patch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patch.swift; sourceTree = "<group>"; };
-		B0AE9FDA228BAE0B000C8092 /* Diff+AppKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Diff+AppKit.swift"; sourceTree = "<group>"; };
-		B0AE9FDB228BAE0B000C8092 /* NestedBatchUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedBatchUpdate.swift; sourceTree = "<group>"; };
-		B0AE9FDC228BAE0B000C8092 /* BatchUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchUpdate.swift; sourceTree = "<group>"; };
-		B0AE9FDD228BAE0B000C8092 /* Patch+Apply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Patch+Apply.swift"; sourceTree = "<group>"; };
-		B0AE9FDE228BAE0B000C8092 /* Patch+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Patch+Sort.swift"; sourceTree = "<group>"; };
-		B0AE9FDF228BAE0B000C8092 /* ExtendedPatch+Apply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExtendedPatch+Apply.swift"; sourceTree = "<group>"; };
-		B0AE9FE0228BAE0B000C8092 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		B0CA1F69229037D8008A7E07 /* Array Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array Extensions.swift"; sourceTree = "<group>"; };
 		B0E0E2612287E544007E95D1 /* BlockChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockChange.swift; sourceTree = "<group>"; };
 		B0EB13A422850091002C326A /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
@@ -178,21 +179,22 @@
 		B0AE9FD1228BAE0B000C8092 /* Differ */ = {
 			isa = PBXGroup;
 			children = (
-				B0AE9FD2228BAE0B000C8092 /* NestedExtendedDiff.swift */,
-				B0AE9FD3228BAE0B000C8092 /* ExtendedPatch.swift */,
-				B0AE9FD4228BAE0B000C8092 /* ExtendedDiff.swift */,
-				B0AE9FD5228BAE0B000C8092 /* Diff+UIKit.swift */,
-				B0AE9FD6228BAE0B000C8092 /* Diff.swift */,
-				B0AE9FD7228BAE0B000C8092 /* NestedDiff.swift */,
-				B0AE9FD8228BAE0B000C8092 /* GenericPatch.swift */,
-				B0AE9FD9228BAE0B000C8092 /* Patch.swift */,
-				B0AE9FDA228BAE0B000C8092 /* Diff+AppKit.swift */,
-				B0AE9FDB228BAE0B000C8092 /* NestedBatchUpdate.swift */,
-				B0AE9FDC228BAE0B000C8092 /* BatchUpdate.swift */,
-				B0AE9FDD228BAE0B000C8092 /* Patch+Apply.swift */,
-				B0AE9FDE228BAE0B000C8092 /* Patch+Sort.swift */,
-				B0AE9FDF228BAE0B000C8092 /* ExtendedPatch+Apply.swift */,
-				B0AE9FE0228BAE0B000C8092 /* LinkedList.swift */,
+				B03D7D0A2292CBB900E3ACA1 /* BatchUpdate.swift */,
+				B03D7D032292CBB900E3ACA1 /* Diff.swift */,
+				B03D7D092292CBB900E3ACA1 /* Diff+AppKit.swift */,
+				B03D7D0F2292CBBA00E3ACA1 /* Diff+UIKit.swift */,
+				B03D7D112292CBBA00E3ACA1 /* ExtendedDiff.swift */,
+				B03D7D082292CBB900E3ACA1 /* ExtendedPatch.swift */,
+				B03D7D102292CBBA00E3ACA1 /* ExtendedPatch+Apply.swift */,
+				B03D7D072292CBB900E3ACA1 /* GenericPatch.swift */,
+				B03D7D0E2292CBBA00E3ACA1 /* LinkedList.swift */,
+				B03D7D042292CBB900E3ACA1 /* NestedBatchUpdate.swift */,
+				B03D7D062292CBB900E3ACA1 /* NestedDiff.swift */,
+				B03D7D0C2292CBB900E3ACA1 /* NestedExtendedDiff.swift */,
+				B03D7D0D2292CBB900E3ACA1 /* Patch.swift */,
+				B03D7D0B2292CBB900E3ACA1 /* Patch+Apply.swift */,
+				B03D7D052292CBB900E3ACA1 /* Patch+Sort.swift */,
+				B03D7D022292CA5500E3ACA1 /* Diff.playground */,
 			);
 			name = Differ;
 			path = Sources/Differ;
@@ -366,31 +368,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B03D7D1B2292CBBA00E3ACA1 /* NestedExtendedDiff.swift in Sources */,
 				B0462B112282BC67000522BB /* Document.swift in Sources */,
-				B0AE9FE4228BAE0B000C8092 /* Diff+UIKit.swift in Sources */,
 				B0CA1F6A229037D8008A7E07 /* Array Extensions.swift in Sources */,
-				B0AE9FE2228BAE0B000C8092 /* ExtendedPatch.swift in Sources */,
-				B0AE9FE5228BAE0B000C8092 /* Diff.swift in Sources */,
-				B0AE9FE7228BAE0B000C8092 /* GenericPatch.swift in Sources */,
-				B0AE9FEF228BAE0B000C8092 /* LinkedList.swift in Sources */,
-				B0AE9FE1228BAE0B000C8092 /* NestedExtendedDiff.swift in Sources */,
-				B0AE9FE8228BAE0B000C8092 /* Patch.swift in Sources */,
-				B0AE9FE6228BAE0B000C8092 /* NestedDiff.swift in Sources */,
 				B0462B0F2282BC67000522BB /* DocumentViewController.swift in Sources */,
+				B03D7D122292CBBA00E3ACA1 /* Diff.swift in Sources */,
+				B03D7D162292CBBA00E3ACA1 /* GenericPatch.swift in Sources */,
+				B03D7D192292CBBA00E3ACA1 /* BatchUpdate.swift in Sources */,
+				B03D7D1A2292CBBA00E3ACA1 /* Patch+Apply.swift in Sources */,
 				B0EB13EA22856CED002C326A /* Color.swift in Sources */,
-				B0AE9FEE228BAE0B000C8092 /* ExtendedPatch+Apply.swift in Sources */,
+				B03D7D152292CBBA00E3ACA1 /* NestedDiff.swift in Sources */,
+				B03D7D142292CBBA00E3ACA1 /* Patch+Sort.swift in Sources */,
 				B0EB13A522850091002C326A /* BlockView.swift in Sources */,
+				B03D7D132292CBBA00E3ACA1 /* NestedBatchUpdate.swift in Sources */,
 				B0EB13E8228562F4002C326A /* Block.swift in Sources */,
-				B0AE9FEA228BAE0B000C8092 /* NestedBatchUpdate.swift in Sources */,
+				B03D7D1F2292CBBA00E3ACA1 /* ExtendedPatch+Apply.swift in Sources */,
 				B0F3EA2B228FF82F00C968E7 /* DeletedBlock.swift in Sources */,
-				B0AE9FEC228BAE0B000C8092 /* Patch+Apply.swift in Sources */,
 				B0E0E2622287E544007E95D1 /* BlockChange.swift in Sources */,
+				B03D7D1C2292CBBA00E3ACA1 /* Patch.swift in Sources */,
+				B03D7D202292CBBA00E3ACA1 /* ExtendedDiff.swift in Sources */,
 				B0462B0D2282BC67000522BB /* DocumentBrowserViewController.swift in Sources */,
-				B0AE9FEB228BAE0B000C8092 /* BatchUpdate.swift in Sources */,
 				B0462B0B2282BC67000522BB /* AppDelegate.swift in Sources */,
-				B0AE9FE3228BAE0B000C8092 /* ExtendedDiff.swift in Sources */,
-				B0AE9FE9228BAE0B000C8092 /* Diff+AppKit.swift in Sources */,
-				B0AE9FED228BAE0B000C8092 /* Patch+Sort.swift in Sources */,
+				B03D7D1E2292CBBA00E3ACA1 /* Diff+UIKit.swift in Sources */,
+				B03D7D172292CBBA00E3ACA1 /* ExtendedPatch.swift in Sources */,
+				B03D7D1D2292CBBA00E3ACA1 /* LinkedList.swift in Sources */,
+				B03D7D182292CBBA00E3ACA1 /* Diff+AppKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

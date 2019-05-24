@@ -59,6 +59,7 @@ extension Array where Element : Comparable {
 }
 
 extension Array where Element : Comparable {
+    // Merge two sorted arrays into a sorted array, keeping one copy of duplicates.
     func sortedMerge(with other: Array) -> Array {
         let all = self + other.reversed()
         let merged = all.reduce(into: (all, [Element]())) { (result, element) in
@@ -84,4 +85,17 @@ extension Array where Element : Comparable {
     }
 }
 
+/*
+https://stackoverflow.com/questions/39791084/swift-3-array-to-dictionary
+ */
+
+extension Array {
+    public func toDictionary<Key: Hashable>(with selectKey: (Element) -> Key) -> [Key:Element] {
+        var dict = [Key:Element]()
+        for element in self {
+            dict[selectKey(element)] = element
+        }
+        return dict
+    }
+}
 

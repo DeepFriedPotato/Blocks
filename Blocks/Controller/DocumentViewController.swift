@@ -26,6 +26,7 @@ class DocumentViewController: UIViewController {
                 self.document.blocksIterator().forEach({ (block) in
                     let blockView = BlockView(color: block.color.uiColor)
                     blockView.center = block.center
+                    blockView.usesRoundedCorners = block.usesRoundedCorners
                     self.view.addSubview(blockView)
                     let tap = UITapGestureRecognizer(target: self, action: #selector(self.blockTapped))
                     blockView.addGestureRecognizer(tap)
@@ -92,7 +93,7 @@ extension DocumentViewController {
         blockView.addGestureRecognizer(tap)
         
         // Update Model
-        let block = Block.init(color: randomColor, center: randomCenter, identifier: UUID(), creationDate: Date())
+        let block = Block.init(color: randomColor, center: randomCenter, identifier: UUID(), creationDate: Date(), modificationDate: Date(), usesRoundedCorners: false)
         print()
         print("❇️Add button Pressed. New block UUID: \(block.identifier). Time: \(Date())")
         document.addBlock(block)
@@ -170,7 +171,8 @@ extension DocumentViewController {
         
         let menu = UIMenuController.shared
         let deleteMenuItem = UIMenuItem(title: "Delete", action: #selector(self.deleteMenuItemTapped))
-        menu.menuItems = [deleteMenuItem]
+        let roundedCornerMenuItem = UIMenuItem(title: (blockView.usesRoundedCorners ? "Disable" : "Enable") + " Rounded Corners", action: #selector(self.roundedCornersMenuItemTapped))
+        menu.menuItems = [deleteMenuItem, roundedCornerMenuItem]
         menu.setTargetRect(blockView.frame, in: view)
         menu.setMenuVisible(true, animated: true)
         
@@ -192,6 +194,17 @@ extension DocumentViewController {
         
         updateNavigationBarTitle()
     }
+    
+    @objc func roundedCornersMenuItemTapped() {
+        guard let lastTappedBlockView = lastTappedBlockView else { fatalError() }
+        guard let index = view.subviews.firstIndex(of: lastTappedBlockView) else { fatalError() }
+        guard let block = document.getBlock(at: index) else { fatalError() }
+        print("⏹roundedCornerMenuItemTapped index=\(index) UUID=\(block.identifier)")
+        document.setBlockUsesRoundedCorners(at: index, !lastTappedBlockView.usesRoundedCorners)
+        
+        lastTappedBlockView.usesRoundedCorners = !lastTappedBlockView.usesRoundedCorners
+        self.lastTappedBlockView = nil
+    }
 }
 
 // MARK: Block changes
@@ -206,12 +219,16 @@ extension DocumentViewController {
             case .insert(let block, let index):
                 let blockView = BlockView(color: block.color.uiColor)
                 blockView.center = block.center
+                blockView.usesRoundedCorners = block.usesRoundedCorners
                 self.view.insertSubview(blockView, at: index)
                 let tap = UITapGestureRecognizer(target: self, action: #selector(self.blockTapped))
                 blockView.addGestureRecognizer(tap)
             case .delete(let index):
                 self.view.subviews[index].removeFromSuperview()
                 //self.view.subviews.value(at: index)?.removeFromSuperview()
+            case .modify(let newBlock, let index):
+                let blockView = self.view.subviews[index] as! BlockView
+                blockView.usesRoundedCorners = newBlock.usesRoundedCorners
             }
         }
     }

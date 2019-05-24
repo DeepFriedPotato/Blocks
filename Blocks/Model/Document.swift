@@ -144,6 +144,21 @@ extension Document {
         }
     }
     
+    func setBlockUsesRoundedCorners(at index: Int, _ usesRoundedCorners: Bool) {
+        guard index >= 0 && index < blocks.count else { fatalError() }
+        blocks[index].usesRoundedCorners = usesRoundedCorners
+        blocks[index].modificationDate = Date()
+        
+        if documentState.contains(.editingDisabled) {
+            shouldUpdateChangeCountOnNextStateChange = true
+            print("   (🙋‍♂️)scheduled to updateChangeCount(.done) because a block is modified")
+        } else {
+            updateChangeCount(.done)
+            print("   🙋‍♂️updateChangeCount(.done) because a block is modified")
+            
+        }
+    }
+    
     func blocksIterator() -> IndexingIterator<[Block]> {
         return blocks.makeIterator()
     }
@@ -173,6 +188,22 @@ extension Document {
                 blockChanges.append(BlockChange.delete(index))
             }
         }
+        
+        // Find modifications
+        var newDictionary = [UUID:(Int,Block)]()
+        for (index, newBlock) in new.enumerated() {
+            newDictionary[newBlock.identifier] = (index,newBlock)
+        }
+        
+        for oldBlock in old {
+            guard let (index,newBlock) = newDictionary[oldBlock.identifier] else { continue }   // If new does not contain oldBlock identifier, skip
+            if !newBlock.fullyEquals(other: oldBlock) {
+                blockChanges.append(BlockChange.modify(newBlock, index))
+            }
+        }
+        
+        
+        
 //        print("==findChange==")
 //        print("Old: \(blocksDebugString(blocks: old))")
 //        print("New: \(blocksDebugString(blocks: new))")
@@ -258,26 +289,28 @@ extension Document {
     func merge(first: [Block], second: [Block], deleted: [DeletedBlock]) -> [Block] {
         let all = first + second.reversed()
         let merged = all.reduce(into: (all, [Block]()), { (result, block) in
-            guard let first = result.0.first else { return }
-            guard let last = result.0.last else { return }
+            guard let firstBlock = result.0.first else { return }
+            guard let lastBlock = result.0.last else { return }
             
-            if first.creationDate < last.creationDate {
+            if firstBlock.creationDate < lastBlock.creationDate {
                 result.0.removeFirst()
-                if deleted.binarySearch(key: DeletedBlock(from: first)) == nil {
-                    result.1.append(first)
+                if deleted.binarySearch(key: DeletedBlock(from: firstBlock)) == nil {
+                    result.1.append(firstBlock)
                 }
-            } else if first.creationDate > last.creationDate {
+            } else if firstBlock.creationDate > lastBlock.creationDate {
                 result.0.removeLast()
-                if deleted.binarySearch(key: DeletedBlock(from: last)) == nil {
-                    result.1.append(last)
+                if deleted.binarySearch(key: DeletedBlock(from: lastBlock)) == nil {
+                    result.1.append(lastBlock)
                 }
             } else {
                 result.0.removeFirst()
-                if result.0.count >= 1 && first.identifier == last.identifier {    // Last one only need to be removed once.
+                if result.0.count >= 1 && firstBlock == lastBlock {    // Last one only need to be removed once.
                     result.0.removeLast()
                 }
-                if deleted.binarySearch(key: DeletedBlock(from: first)) == nil {
-                    result.1.append(first)
+                if deleted.binarySearch(key: DeletedBlock(from: firstBlock)) == nil {
+                    // Append the version with the latest modification date.
+                    let useFirstBlock = firstBlock.modificationDate > lastBlock.modificationDate
+                    result.1.append(useFirstBlock ? firstBlock : lastBlock)
                 }
             }
         }).1
