@@ -10,6 +10,8 @@ import UIKit
 
 class DocumentViewController: UIViewController {
     
+    static let canvasSize = CGSize(width: 320, height: 320)
+    
     var document: Document!
     
     var lastTappedBlockView: BlockView?
@@ -85,7 +87,8 @@ extension DocumentViewController {
         let blockView = BlockView(color: randomColor.uiColor)
         let halfWidth = BlockView.sideLength / 2.0
         let topInset = view.safeAreaInsets.top
-        let randomCenter = CGPoint(x: .random(in: halfWidth...(320 - halfWidth)), y: .random(in: (halfWidth + topInset)...(320 - halfWidth)))
+        let canvasSize = DocumentViewController.canvasSize
+        let randomCenter = CGPoint(x: .random(in: halfWidth...(canvasSize.width - halfWidth)), y: .random(in: (halfWidth + topInset)...(canvasSize.height - halfWidth)))
         blockView.center = randomCenter
         view.addSubview(blockView)
         
