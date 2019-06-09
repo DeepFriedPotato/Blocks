@@ -178,6 +178,8 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
             self.transitionController = self.transitionController(forDocumentAt: documentURL)
             self.transitionController?.targetView = documentViewController.canvasView
             
+            documentNavigationViewController.modalPresentationStyle = .fullScreen
+            
             self.present(documentNavigationViewController, animated: animated, completion: nil)
         }
     }
