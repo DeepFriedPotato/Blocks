@@ -58,6 +58,8 @@
 		B0462B2F2282BC69000522BB /* BlocksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0462B2E2282BC69000522BB /* BlocksUITests.swift */; };
 		B0CA1F6A229037D8008A7E07 /* Array Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CA1F69229037D8008A7E07 /* Array Extensions.swift */; };
 		B0E0E2622287E544007E95D1 /* BlockChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E0E2612287E544007E95D1 /* BlockChange.swift */; };
+		B0E426DA229926850078564A /* ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E426D9229926850078564A /* ShowAlert.swift */; };
+		B0E426DB229928310078564A /* ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E426D9229926850078564A /* ShowAlert.swift */; };
 		B0EB13A522850091002C326A /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13A422850091002C326A /* BlockView.swift */; };
 		B0EB13E8228562F4002C326A /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13E7228562F4002C326A /* Block.swift */; };
 		B0EB13EA22856CED002C326A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13E922856CED002C326A /* Color.swift */; };
@@ -139,6 +141,7 @@
 		B0462B302282BC69000522BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0CA1F69229037D8008A7E07 /* Array Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array Extensions.swift"; sourceTree = "<group>"; };
 		B0E0E2612287E544007E95D1 /* BlockChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockChange.swift; sourceTree = "<group>"; };
+		B0E426D9229926850078564A /* ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlert.swift; sourceTree = "<group>"; };
 		B0EB13A422850091002C326A /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		B0EB13E7228562F4002C326A /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		B0EB13E922856CED002C326A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -300,6 +303,7 @@
 			children = (
 				B0EB13E922856CED002C326A /* Color.swift */,
 				B0CA1F69229037D8008A7E07 /* Array Extensions.swift */,
+				B0E426D9229926850078564A /* ShowAlert.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -465,6 +469,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0E426DB229928310078564A /* ShowAlert.swift in Sources */,
 				B0323B5C2297E78F00802442 /* BatchUpdate.swift in Sources */,
 				B0323B5D2297E78F00802442 /* Diff.swift in Sources */,
 				B0323B5E2297E78F00802442 /* Diff+AppKit.swift in Sources */,
@@ -519,6 +524,7 @@
 				B0462B0B2282BC67000522BB /* AppDelegate.swift in Sources */,
 				B03D7D1E2292CBBA00E3ACA1 /* Diff+UIKit.swift in Sources */,
 				B03D7D172292CBBA00E3ACA1 /* ExtendedPatch.swift in Sources */,
+				B0E426DA229926850078564A /* ShowAlert.swift in Sources */,
 				B03D7D1D2292CBBA00E3ACA1 /* LinkedList.swift in Sources */,
 				B03D7D182292CBBA00E3ACA1 /* Diff+AppKit.swift in Sources */,
 			);

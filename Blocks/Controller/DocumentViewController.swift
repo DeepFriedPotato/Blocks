@@ -10,26 +10,47 @@ import UIKit
 
 class DocumentViewController: UIViewController {
     
+    var canvasView: UIView!
     static let canvasSize = CGSize(width: 320, height: 320)
     
-    var document: Document!
+    private(set) var document: Document!
     
     var lastTappedBlockView: BlockView?
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        print("DocumentViewController viewDidLoad()")
+        canvasView = UIView(frame: CGRect(origin: .zero, size: DocumentViewController.canvasSize))
+        //canvasView.backgroundColor = .red
         
+        view.addSubview(canvasView)
         
-        // Access the document
-        document?.open(completionHandler: { [unowned self] (success) in
+        canvasView.translatesAutoresizingMaskIntoConstraints = false
+        canvasView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        canvasView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        canvasView.widthAnchor.constraint(equalToConstant: DocumentViewController.canvasSize.width).isActive = true
+        canvasView.heightAnchor.constraint(equalToConstant: DocumentViewController.canvasSize.height).isActive = true
+        
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchGestureUpdated))
+        view.addGestureRecognizer(pinchGesture)
+    }
+    
+    func setAndOpenDocument(_ document: Document, completion: @escaping () -> Void) {
+        loadViewIfNeeded()
+        
+        self.document = document
+        
+        print("FileManager.default.isWritableFile(atPath: document.fileURL.path) \(FileManager.default.isWritableFile(atPath: document.fileURL.path))")
+        
+        document.open(completionHandler: { [unowned self] (success) in
             if success {
                 print()
                 print("🎉Document open success")
+                print("FileManager.default.isWritableFile(atPath: document.fileURL.path) \(FileManager.default.isWritableFile(atPath: document.fileURL.path))")
                 self.document.blocksIterator().forEach({ (block) in
                     let blockView = BlockView(color: block.color.uiColor)
                     blockView.center = block.center
                     blockView.usesRoundedCorners = block.usesRoundedCorners
-                    self.view.addSubview(blockView)
+                    self.canvasView.addSubview(blockView)
                     let tap = UITapGestureRecognizer(target: self, action: #selector(self.blockTapped))
                     blockView.addGestureRecognizer(tap)
                 })
@@ -46,21 +67,15 @@ class DocumentViewController: UIViewController {
                 
                 // Yuck. Can't put it in Document.init(), so I guess its goes here.
                 self.document.finishedOpeningDocument()
+                completion()
                 
             } else {
                 // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
                 print("Failed to open document")
+                showAlert(presentingViewController: self, title: "Failed to open document")
             }
         })
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        
-        
-    }
-    
-    
     
     
 }
@@ -68,11 +83,24 @@ class DocumentViewController: UIViewController {
 // MARK: User action
 extension DocumentViewController {
     
-    @IBAction func dismissDocumentViewController() {
+    @IBAction func closeDocumentButtonTapped() {
+        dismissDocumentViewController()
+    }
+    
+    func dismissDocumentViewController(completion: (() -> Void)? = nil) {
         print()
         print("👋 DismissDocumentViewController")
         self.document.close { (success) in
             self.dismiss(animated: true, completion: nil)
+            if let completion = completion {
+                completion()
+            }
+        }
+    }
+    
+    @objc func pinchGestureUpdated(gr: UIPinchGestureRecognizer) {
+        if (gr.state == .began && gr.scale < 1) {
+            dismissDocumentViewController()
         }
     }
     
@@ -86,11 +114,12 @@ extension DocumentViewController {
         // Update View
         let blockView = BlockView(color: randomColor.uiColor)
         let halfWidth = BlockView.sideLength / 2.0
-        let topInset = view.safeAreaInsets.top
+        //let topInset = view.safeAreaInsets.top
         let canvasSize = DocumentViewController.canvasSize
-        let randomCenter = CGPoint(x: .random(in: halfWidth...(canvasSize.width - halfWidth)), y: .random(in: (halfWidth + topInset)...(canvasSize.height - halfWidth)))
+        //let randomCenter = CGPoint(x: .random(in: halfWidth...(canvasSize.width - halfWidth)), y: .random(in: (halfWidth + topInset)...(canvasSize.height - halfWidth)))
+        let randomCenter = CGPoint(x: .random(in: halfWidth...(canvasSize.width - halfWidth)), y: .random(in: halfWidth...(canvasSize.height - halfWidth)))
         blockView.center = randomCenter
-        view.addSubview(blockView)
+        canvasView.addSubview(blockView)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.blockTapped))
         blockView.addGestureRecognizer(tap)
@@ -176,7 +205,7 @@ extension DocumentViewController {
         let deleteMenuItem = UIMenuItem(title: "Delete", action: #selector(self.deleteMenuItemTapped))
         let roundedCornerMenuItem = UIMenuItem(title: (blockView.usesRoundedCorners ? "Disable" : "Enable") + " Rounded Corners", action: #selector(self.roundedCornersMenuItemTapped))
         menu.menuItems = [deleteMenuItem, roundedCornerMenuItem]
-        menu.setTargetRect(blockView.frame, in: view)
+        menu.setTargetRect(blockView.frame, in: canvasView)
         menu.setMenuVisible(true, animated: true)
         
         lastTappedBlockView = blockView
@@ -187,7 +216,7 @@ extension DocumentViewController {
     @objc func deleteMenuItemTapped() {
         
         guard let lastTappedBlockView = lastTappedBlockView else { fatalError() }
-        guard let index = view.subviews.firstIndex(of: lastTappedBlockView) else { fatalError() }
+        guard let index = canvasView.subviews.firstIndex(of: lastTappedBlockView) else { fatalError() }
         guard let block = document.getBlock(at: index) else { fatalError() }
         print("❌deleteMenuItemTapped index=\(index) UUID=\(block.identifier)")
         document.deleteBlock(at: index)
@@ -200,7 +229,7 @@ extension DocumentViewController {
     
     @objc func roundedCornersMenuItemTapped() {
         guard let lastTappedBlockView = lastTappedBlockView else { fatalError() }
-        guard let index = view.subviews.firstIndex(of: lastTappedBlockView) else { fatalError() }
+        guard let index = canvasView.subviews.firstIndex(of: lastTappedBlockView) else { fatalError() }
         guard let block = document.getBlock(at: index) else { fatalError() }
         print("⏹roundedCornerMenuItemTapped index=\(index) UUID=\(block.identifier)")
         document.setBlockUsesRoundedCorners(at: index, !lastTappedBlockView.usesRoundedCorners)
@@ -223,14 +252,14 @@ extension DocumentViewController {
                 let blockView = BlockView(color: block.color.uiColor)
                 blockView.center = block.center
                 blockView.usesRoundedCorners = block.usesRoundedCorners
-                self.view.insertSubview(blockView, at: index)
+                self.canvasView.insertSubview(blockView, at: index)
                 let tap = UITapGestureRecognizer(target: self, action: #selector(self.blockTapped))
                 blockView.addGestureRecognizer(tap)
             case .delete(let index):
-                self.view.subviews[index].removeFromSuperview()
+                self.canvasView.subviews[index].removeFromSuperview()
                 //self.view.subviews.value(at: index)?.removeFromSuperview()
             case .modify(let newBlock, let index):
-                let blockView = self.view.subviews[index] as! BlockView
+                let blockView = self.canvasView.subviews[index] as! BlockView
                 blockView.usesRoundedCorners = newBlock.usesRoundedCorners
             }
         }

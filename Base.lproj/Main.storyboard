@@ -38,7 +38,7 @@
                     <navigationItem key="navigationItem" id="YUl-WZ-aku">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="sm6-el-0bb">
                             <connections>
-                                <action selector="dismissDocumentViewController" destination="M2k-L8-Olo" id="S08-YS-DuV"/>
+                                <action selector="closeDocumentButtonTapped" destination="M2k-L8-Olo" id="VNv-O5-RMX"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>

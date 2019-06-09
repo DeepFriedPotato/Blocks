@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
+   uuid = "2D1F1C52-1EB2-4C54-95FE-F5E709743EED"
    type = "1"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "CE33E6A0-BD62-4F0F-B150-E5B9F6564B78"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -22,11 +24,12 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "3B9CAB34-7D80-453B-8DE7-EFF20544810B"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/Model/Document.swift"
-            timestampString = "580395376.009025"
+            timestampString = "580472447.485357"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "189"
@@ -38,11 +41,12 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "173835AE-FD27-4BF1-BF4B-F91808714B8F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/Model/Document.swift"
-            timestampString = "580395376.009094"
+            timestampString = "580472447.4856271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "270"
@@ -54,11 +58,12 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "A500EC20-B339-41F8-95F0-B4A9BA214AC8"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/Model/Document.swift"
-            timestampString = "580395376.009147"
+            timestampString = "580472447.485683"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "224"
@@ -70,51 +75,55 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "76D9AFE0-EC16-4282-A9DE-5DA7C91DBECE"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/Controller/DocumentViewController.swift"
-            timestampString = "580395376.009198"
+            timestampString = "580474975.195909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "addButtonPressed(_:)"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "pinchGestureUpdated(gr:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "F13EE066-F550-4AD9-BB24-06D5CE71EE97"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/Model/Document.swift"
-            timestampString = "580395376.0092421"
+            timestampString = "580472447.485929"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "213"
             endingLineNumber = "213"
-            landmarkName = "resolveConflict()"
-            landmarkType = "7">
+            landmarkName = "Document"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "9BDF5CB8-E1F0-4FEE-9287-718D200CFC68"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/Model/Document.swift"
-            timestampString = "580395376.009288"
+            timestampString = "580472447.485979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "212"
             endingLineNumber = "212"
-            landmarkName = "resolveConflict()"
+            landmarkName = "findChange(old:new:)"
             landmarkType = "7">
             <Locations>
                <Location
+                  uuid = "9BDF5CB8-E1F0-4FEE-9287-718D200CFC68 - d5a754c730b59871"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -130,6 +139,7 @@
                   offsetFromSymbolStart = "2276">
                </Location>
                <Location
+                  uuid = "9BDF5CB8-E1F0-4FEE-9287-718D200CFC68 - 6fa33bc0207dc59f"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -150,11 +160,12 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "427B606D-9BC0-475A-84CF-7F073277646B"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/Model/Document.swift"
-            timestampString = "580395376.009333"
+            timestampString = "580472447.486025"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "128"
@@ -166,11 +177,12 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "FBB86504-1358-4BD9-8270-74206428782E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/Model/Document.swift"
-            timestampString = "580395376.009379"
+            timestampString = "580472447.48607"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
@@ -182,11 +194,12 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "40E1913F-FEFC-4794-874B-3908ECCE7B7A"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/Model/Document.swift"
-            timestampString = "580395376.009423"
+            timestampString = "580472447.4861161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "272"
@@ -198,6 +211,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "0E44EBE6-784B-44DC-B8BB-561178624CC0"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -214,11 +228,12 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "FBFCC3BE-3D2F-4060-A8BC-3EFF24967A6C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/Model/Document.swift"
-            timestampString = "580395376.009555"
+            timestampString = "580472447.486203"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "295"
@@ -230,15 +245,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "EF0BE9AD-B751-4117-8590-E856D3DD0BC4"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/Controller/DocumentBrowserViewController.swift"
-            timestampString = "580392674.5680799"
+            timestampString = "580474975.196165"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "encodeRestorableState(with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -246,16 +262,85 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "CF34897B-8624-47AB-903B-83F82DDC5B2F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/Controller/DocumentBrowserViewController.swift"
-            timestampString = "580392674.568206"
+            timestampString = "580474975.196244"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "decodeRestorableState(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D1DBABC0-9416-45C3-9E41-934FE5D2BA4C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Blocks/Controller/DocumentViewController.swift"
+            timestampString = "580474975.196314"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "setAndOpenDocument(_:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D1DBABC0-9416-45C3-9E41-934FE5D2BA4C - 4fa169322138ff8a"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool) -&gt; () in Blocks.DocumentViewController.setAndOpenDocument(_: Blocks.Document, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "Blocks"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/steven/Library/Mobile%20Documents/com~apple~CloudDocs/Xcode%20Playgrounds/Blocks/Blocks/Controller/DocumentViewController.swift"
+                  timestampString = "580464887.1387661"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "444">
+               </Location>
+               <Location
+                  uuid = "D1DBABC0-9416-45C3-9E41-934FE5D2BA4C - 4d71ffdba81f21ef"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Blocks.Block) -&gt; () in closure #1 (Swift.Bool) -&gt; () in Blocks.DocumentViewController.setAndOpenDocument(_: Blocks.Document, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "Blocks"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/steven/Library/Mobile%20Documents/com~apple~CloudDocs/Xcode%20Playgrounds/Blocks/Blocks/Controller/DocumentViewController.swift"
+                  timestampString = "580464887.140873"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A8FDFF92-02C2-49DF-9517-73041D5C9AE3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Blocks/Controller/DocumentViewController.swift"
+            timestampString = "580474975.196376"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "addButtonPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

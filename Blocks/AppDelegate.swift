@@ -44,20 +44,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open inputURL: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         // Ensure the URL is a file URL
         guard inputURL.isFileURL else { return false }
-                
+        
+        print("FileManager.default.isWritableFile(atPath: inputURL) \(FileManager.default.isWritableFile(atPath: inputURL.path))")
+        
+        let openInPlace = (options[UIApplication.OpenURLOptionsKey.openInPlace] as! Bool?) ?? false
+        print("openInPlace \(openInPlace)")
+        
+        
+        
+        
         // Reveal / import the document at the URL
         guard let documentBrowserViewController = window?.rootViewController as? DocumentBrowserViewController else { return false }
-
-        documentBrowserViewController.revealDocument(at: inputURL, importIfNeeded: true) { (revealedDocumentURL, error) in
-            if let error = error {
-                // Handle the error appropriately
-                print("Failed to reveal the document at URL \(inputURL) with error: '\(error)'")
-                return
-            }
-            
-            // Present the Document View Controller for the revealed URL
-            documentBrowserViewController.presentDocument(at: revealedDocumentURL!)
-        }
+        
+        documentBrowserViewController.openURLFromApplication(url: inputURL, openInPlace: openInPlace)
 
         return true
     }
