@@ -15,38 +15,7 @@
 		B0323B572297E71D00802442 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13E922856CED002C326A /* Color.swift */; };
 		B0323B582297E71D00802442 /* Array Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CA1F69229037D8008A7E07 /* Array Extensions.swift */; };
 		B0323B592297E74200802442 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13E7228562F4002C326A /* Block.swift */; };
-		B0323B5A2297E75600802442 /* DeletedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F3EA2A228FF82F00C968E7 /* DeletedBlock.swift */; };
 		B0323B5B2297E75600802442 /* BlockChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E0E2612287E544007E95D1 /* BlockChange.swift */; };
-		B0323B5C2297E78F00802442 /* BatchUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0A2292CBB900E3ACA1 /* BatchUpdate.swift */; };
-		B0323B5D2297E78F00802442 /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D032292CBB900E3ACA1 /* Diff.swift */; };
-		B0323B5E2297E78F00802442 /* Diff+AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D092292CBB900E3ACA1 /* Diff+AppKit.swift */; };
-		B0323B5F2297E78F00802442 /* Diff+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0F2292CBBA00E3ACA1 /* Diff+UIKit.swift */; };
-		B0323B602297E78F00802442 /* ExtendedDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D112292CBBA00E3ACA1 /* ExtendedDiff.swift */; };
-		B0323B612297E78F00802442 /* ExtendedPatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D082292CBB900E3ACA1 /* ExtendedPatch.swift */; };
-		B0323B622297E78F00802442 /* ExtendedPatch+Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D102292CBBA00E3ACA1 /* ExtendedPatch+Apply.swift */; };
-		B0323B632297E78F00802442 /* GenericPatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D072292CBB900E3ACA1 /* GenericPatch.swift */; };
-		B0323B642297E78F00802442 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0E2292CBBA00E3ACA1 /* LinkedList.swift */; };
-		B0323B652297E78F00802442 /* NestedBatchUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D042292CBB900E3ACA1 /* NestedBatchUpdate.swift */; };
-		B0323B662297E78F00802442 /* NestedDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D062292CBB900E3ACA1 /* NestedDiff.swift */; };
-		B0323B672297E78F00802442 /* NestedExtendedDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0C2292CBB900E3ACA1 /* NestedExtendedDiff.swift */; };
-		B0323B682297E78F00802442 /* Patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0D2292CBB900E3ACA1 /* Patch.swift */; };
-		B0323B692297E78F00802442 /* Patch+Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0B2292CBB900E3ACA1 /* Patch+Apply.swift */; };
-		B0323B6A2297E78F00802442 /* Patch+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D052292CBB900E3ACA1 /* Patch+Sort.swift */; };
-		B03D7D122292CBBA00E3ACA1 /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D032292CBB900E3ACA1 /* Diff.swift */; };
-		B03D7D132292CBBA00E3ACA1 /* NestedBatchUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D042292CBB900E3ACA1 /* NestedBatchUpdate.swift */; };
-		B03D7D142292CBBA00E3ACA1 /* Patch+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D052292CBB900E3ACA1 /* Patch+Sort.swift */; };
-		B03D7D152292CBBA00E3ACA1 /* NestedDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D062292CBB900E3ACA1 /* NestedDiff.swift */; };
-		B03D7D162292CBBA00E3ACA1 /* GenericPatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D072292CBB900E3ACA1 /* GenericPatch.swift */; };
-		B03D7D172292CBBA00E3ACA1 /* ExtendedPatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D082292CBB900E3ACA1 /* ExtendedPatch.swift */; };
-		B03D7D182292CBBA00E3ACA1 /* Diff+AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D092292CBB900E3ACA1 /* Diff+AppKit.swift */; };
-		B03D7D192292CBBA00E3ACA1 /* BatchUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0A2292CBB900E3ACA1 /* BatchUpdate.swift */; };
-		B03D7D1A2292CBBA00E3ACA1 /* Patch+Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0B2292CBB900E3ACA1 /* Patch+Apply.swift */; };
-		B03D7D1B2292CBBA00E3ACA1 /* NestedExtendedDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0C2292CBB900E3ACA1 /* NestedExtendedDiff.swift */; };
-		B03D7D1C2292CBBA00E3ACA1 /* Patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0D2292CBB900E3ACA1 /* Patch.swift */; };
-		B03D7D1D2292CBBA00E3ACA1 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0E2292CBBA00E3ACA1 /* LinkedList.swift */; };
-		B03D7D1E2292CBBA00E3ACA1 /* Diff+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D0F2292CBBA00E3ACA1 /* Diff+UIKit.swift */; };
-		B03D7D1F2292CBBA00E3ACA1 /* ExtendedPatch+Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D102292CBBA00E3ACA1 /* ExtendedPatch+Apply.swift */; };
-		B03D7D202292CBBA00E3ACA1 /* ExtendedDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D7D112292CBBA00E3ACA1 /* ExtendedDiff.swift */; };
 		B0462B0B2282BC67000522BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0462B0A2282BC67000522BB /* AppDelegate.swift */; };
 		B0462B0D2282BC67000522BB /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0462B0C2282BC67000522BB /* DocumentBrowserViewController.swift */; };
 		B0462B0F2282BC67000522BB /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0462B0E2282BC67000522BB /* DocumentViewController.swift */; };
@@ -56,6 +25,7 @@
 		B0462B192282BC69000522BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0462B172282BC69000522BB /* LaunchScreen.storyboard */; };
 		B0462B242282BC69000522BB /* BlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0462B232282BC69000522BB /* BlocksTests.swift */; };
 		B0462B2F2282BC69000522BB /* BlocksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0462B2E2282BC69000522BB /* BlocksUITests.swift */; };
+		B0BAA78E22AF546100656A69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAA78D22AF546100656A69 /* SceneDelegate.swift */; };
 		B0CA1F6A229037D8008A7E07 /* Array Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CA1F69229037D8008A7E07 /* Array Extensions.swift */; };
 		B0E0E2622287E544007E95D1 /* BlockChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E0E2612287E544007E95D1 /* BlockChange.swift */; };
 		B0E426DA229926850078564A /* ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E426D9229926850078564A /* ShowAlert.swift */; };
@@ -63,7 +33,6 @@
 		B0EB13A522850091002C326A /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13A422850091002C326A /* BlockView.swift */; };
 		B0EB13E8228562F4002C326A /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13E7228562F4002C326A /* Block.swift */; };
 		B0EB13EA22856CED002C326A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13E922856CED002C326A /* Color.swift */; };
-		B0F3EA2B228FF82F00C968E7 /* DeletedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F3EA2A228FF82F00C968E7 /* DeletedBlock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,22 +77,6 @@
 		B0323B482297DFB500802442 /* BlocksThumbnailExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BlocksThumbnailExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0323B4A2297DFB500802442 /* ThumbnailProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailProvider.swift; sourceTree = "<group>"; };
 		B0323B4C2297DFB500802442 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B03D7D022292CA5500E3ACA1 /* Diff.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = Diff.playground; path = Blocks/Sources/Differ/Diff.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		B03D7D032292CBB900E3ACA1 /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
-		B03D7D042292CBB900E3ACA1 /* NestedBatchUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedBatchUpdate.swift; sourceTree = "<group>"; };
-		B03D7D052292CBB900E3ACA1 /* Patch+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Patch+Sort.swift"; sourceTree = "<group>"; };
-		B03D7D062292CBB900E3ACA1 /* NestedDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedDiff.swift; sourceTree = "<group>"; };
-		B03D7D072292CBB900E3ACA1 /* GenericPatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericPatch.swift; sourceTree = "<group>"; };
-		B03D7D082292CBB900E3ACA1 /* ExtendedPatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedPatch.swift; sourceTree = "<group>"; };
-		B03D7D092292CBB900E3ACA1 /* Diff+AppKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Diff+AppKit.swift"; sourceTree = "<group>"; };
-		B03D7D0A2292CBB900E3ACA1 /* BatchUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchUpdate.swift; sourceTree = "<group>"; };
-		B03D7D0B2292CBB900E3ACA1 /* Patch+Apply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Patch+Apply.swift"; sourceTree = "<group>"; };
-		B03D7D0C2292CBB900E3ACA1 /* NestedExtendedDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedExtendedDiff.swift; sourceTree = "<group>"; };
-		B03D7D0D2292CBB900E3ACA1 /* Patch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patch.swift; sourceTree = "<group>"; };
-		B03D7D0E2292CBBA00E3ACA1 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
-		B03D7D0F2292CBBA00E3ACA1 /* Diff+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Diff+UIKit.swift"; sourceTree = "<group>"; };
-		B03D7D102292CBBA00E3ACA1 /* ExtendedPatch+Apply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExtendedPatch+Apply.swift"; sourceTree = "<group>"; };
-		B03D7D112292CBBA00E3ACA1 /* ExtendedDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedDiff.swift; sourceTree = "<group>"; };
 		B0462B072282BC67000522BB /* Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0462B0A2282BC67000522BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0462B0C2282BC67000522BB /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
@@ -139,13 +92,13 @@
 		B0462B2A2282BC69000522BB /* BlocksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0462B2E2282BC69000522BB /* BlocksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksUITests.swift; sourceTree = "<group>"; };
 		B0462B302282BC69000522BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0BAA78D22AF546100656A69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B0CA1F69229037D8008A7E07 /* Array Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array Extensions.swift"; sourceTree = "<group>"; };
 		B0E0E2612287E544007E95D1 /* BlockChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockChange.swift; sourceTree = "<group>"; };
 		B0E426D9229926850078564A /* ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlert.swift; sourceTree = "<group>"; };
 		B0EB13A422850091002C326A /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		B0EB13E7228562F4002C326A /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		B0EB13E922856CED002C326A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		B0F3EA2A228FF82F00C968E7 /* DeletedBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedBlock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,11 +169,11 @@
 			isa = PBXGroup;
 			children = (
 				B0462B0A2282BC67000522BB /* AppDelegate.swift */,
+				B0BAA78D22AF546100656A69 /* SceneDelegate.swift */,
 				B0EB13E522855BA6002C326A /* Model */,
 				B0EB13E422855B96002C326A /* Controller */,
 				B0EB13E622855BC0002C326A /* View */,
 				B0EB13EB22856CF4002C326A /* Helper */,
-				B0AE9FD1228BAE0B000C8092 /* Differ */,
 				B0462B152282BC69000522BB /* Assets.xcassets */,
 				B0462B172282BC69000522BB /* LaunchScreen.storyboard */,
 				B0462B1A2282BC69000522BB /* Info.plist */,
@@ -246,30 +199,6 @@
 			path = BlocksUITests;
 			sourceTree = "<group>";
 		};
-		B0AE9FD1228BAE0B000C8092 /* Differ */ = {
-			isa = PBXGroup;
-			children = (
-				B03D7D0A2292CBB900E3ACA1 /* BatchUpdate.swift */,
-				B03D7D032292CBB900E3ACA1 /* Diff.swift */,
-				B03D7D092292CBB900E3ACA1 /* Diff+AppKit.swift */,
-				B03D7D0F2292CBBA00E3ACA1 /* Diff+UIKit.swift */,
-				B03D7D112292CBBA00E3ACA1 /* ExtendedDiff.swift */,
-				B03D7D082292CBB900E3ACA1 /* ExtendedPatch.swift */,
-				B03D7D102292CBBA00E3ACA1 /* ExtendedPatch+Apply.swift */,
-				B03D7D072292CBB900E3ACA1 /* GenericPatch.swift */,
-				B03D7D0E2292CBBA00E3ACA1 /* LinkedList.swift */,
-				B03D7D042292CBB900E3ACA1 /* NestedBatchUpdate.swift */,
-				B03D7D062292CBB900E3ACA1 /* NestedDiff.swift */,
-				B03D7D0C2292CBB900E3ACA1 /* NestedExtendedDiff.swift */,
-				B03D7D0D2292CBB900E3ACA1 /* Patch.swift */,
-				B03D7D0B2292CBB900E3ACA1 /* Patch+Apply.swift */,
-				B03D7D052292CBB900E3ACA1 /* Patch+Sort.swift */,
-				B03D7D022292CA5500E3ACA1 /* Diff.playground */,
-			);
-			name = Differ;
-			path = Sources/Differ;
-			sourceTree = "<group>";
-		};
 		B0EB13E422855B96002C326A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,7 +213,6 @@
 			children = (
 				B0462B102282BC67000522BB /* Document.swift */,
 				B0EB13E7228562F4002C326A /* Block.swift */,
-				B0F3EA2A228FF82F00C968E7 /* DeletedBlock.swift */,
 				B0E0E2612287E544007E95D1 /* BlockChange.swift */,
 			);
 			path = Model;
@@ -470,22 +398,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0E426DB229928310078564A /* ShowAlert.swift in Sources */,
-				B0323B5C2297E78F00802442 /* BatchUpdate.swift in Sources */,
-				B0323B5D2297E78F00802442 /* Diff.swift in Sources */,
-				B0323B5E2297E78F00802442 /* Diff+AppKit.swift in Sources */,
-				B0323B5F2297E78F00802442 /* Diff+UIKit.swift in Sources */,
-				B0323B602297E78F00802442 /* ExtendedDiff.swift in Sources */,
-				B0323B612297E78F00802442 /* ExtendedPatch.swift in Sources */,
-				B0323B622297E78F00802442 /* ExtendedPatch+Apply.swift in Sources */,
-				B0323B632297E78F00802442 /* GenericPatch.swift in Sources */,
-				B0323B642297E78F00802442 /* LinkedList.swift in Sources */,
-				B0323B652297E78F00802442 /* NestedBatchUpdate.swift in Sources */,
-				B0323B662297E78F00802442 /* NestedDiff.swift in Sources */,
-				B0323B672297E78F00802442 /* NestedExtendedDiff.swift in Sources */,
-				B0323B682297E78F00802442 /* Patch.swift in Sources */,
-				B0323B692297E78F00802442 /* Patch+Apply.swift in Sources */,
-				B0323B6A2297E78F00802442 /* Patch+Sort.swift in Sources */,
-				B0323B5A2297E75600802442 /* DeletedBlock.swift in Sources */,
 				B0323B5B2297E75600802442 /* BlockChange.swift in Sources */,
 				B0323B592297E74200802442 /* Block.swift in Sources */,
 				B0323B562297E71D00802442 /* BlockView.swift in Sources */,
@@ -501,32 +413,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B03D7D1B2292CBBA00E3ACA1 /* NestedExtendedDiff.swift in Sources */,
 				B0462B112282BC67000522BB /* Document.swift in Sources */,
 				B0CA1F6A229037D8008A7E07 /* Array Extensions.swift in Sources */,
 				B0462B0F2282BC67000522BB /* DocumentViewController.swift in Sources */,
-				B03D7D122292CBBA00E3ACA1 /* Diff.swift in Sources */,
-				B03D7D162292CBBA00E3ACA1 /* GenericPatch.swift in Sources */,
-				B03D7D192292CBBA00E3ACA1 /* BatchUpdate.swift in Sources */,
-				B03D7D1A2292CBBA00E3ACA1 /* Patch+Apply.swift in Sources */,
 				B0EB13EA22856CED002C326A /* Color.swift in Sources */,
-				B03D7D152292CBBA00E3ACA1 /* NestedDiff.swift in Sources */,
-				B03D7D142292CBBA00E3ACA1 /* Patch+Sort.swift in Sources */,
+				B0BAA78E22AF546100656A69 /* SceneDelegate.swift in Sources */,
 				B0EB13A522850091002C326A /* BlockView.swift in Sources */,
-				B03D7D132292CBBA00E3ACA1 /* NestedBatchUpdate.swift in Sources */,
 				B0EB13E8228562F4002C326A /* Block.swift in Sources */,
-				B03D7D1F2292CBBA00E3ACA1 /* ExtendedPatch+Apply.swift in Sources */,
-				B0F3EA2B228FF82F00C968E7 /* DeletedBlock.swift in Sources */,
 				B0E0E2622287E544007E95D1 /* BlockChange.swift in Sources */,
-				B03D7D1C2292CBBA00E3ACA1 /* Patch.swift in Sources */,
-				B03D7D202292CBBA00E3ACA1 /* ExtendedDiff.swift in Sources */,
 				B0462B0D2282BC67000522BB /* DocumentBrowserViewController.swift in Sources */,
 				B0462B0B2282BC67000522BB /* AppDelegate.swift in Sources */,
-				B03D7D1E2292CBBA00E3ACA1 /* Diff+UIKit.swift in Sources */,
-				B03D7D172292CBBA00E3ACA1 /* ExtendedPatch.swift in Sources */,
 				B0E426DA229926850078564A /* ShowAlert.swift in Sources */,
-				B03D7D1D2292CBBA00E3ACA1 /* LinkedList.swift in Sources */,
-				B03D7D182292CBBA00E3ACA1 /* Diff+AppKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,6 +489,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P87UN8JYS9;
 				INFOPLIST_FILE = BlocksThumbnailExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -611,6 +509,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P87UN8JYS9;
 				INFOPLIST_FILE = BlocksThumbnailExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
