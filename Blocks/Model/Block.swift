@@ -12,14 +12,14 @@ import CoreGraphics
 struct Block: Equatable {
     let color: Color
     var center: CGPoint
-    let identifier: UUID
+    let uuid: UUID
     let creationDate: Date
     var modificationDate: Date
     var usesRoundedCorners: Bool
     
     // Equatable. Checks UUID only
     static func == (lhs: Block, rhs: Block) -> Bool {
-        return lhs.identifier == rhs.identifier
+        return lhs.uuid == rhs.uuid
     }
     
     // Fully equals

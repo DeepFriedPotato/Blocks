@@ -34,18 +34,22 @@ class DocumentViewController: UIViewController {
         view.addGestureRecognizer(pinchGesture)
     }
     
-    func setAndOpenDocument(_ document: Document, completion: @escaping () -> Void) {
+    func setAndOpenDocumentURL(_ url: URL, completion: @escaping () -> Void) {
         loadViewIfNeeded()
         
-        self.document = document
+        url.startAccessingSecurityScopedResource()
+        
+        self.document = Document(fileURL: url)
         
         print("FileManager.default.isWritableFile(atPath: document.fileURL.path) \(FileManager.default.isWritableFile(atPath: document.fileURL.path))")
+        
+        
         
         document.open(completionHandler: { [unowned self] (success) in
             if success {
                 print()
                 print("🎉Document open success")
-                print("FileManager.default.isWritableFile(atPath: document.fileURL.path) \(FileManager.default.isWritableFile(atPath: document.fileURL.path))")
+                print("FileManager.default.isWritableFile(atPath: document.fileURL.path) \(FileManager.default.isWritableFile(atPath: self.document.fileURL.path))")
                 self.document.blocksIterator().forEach({ (block) in
                     let blockView = BlockView(color: block.color.uiColor)
                     blockView.center = block.center
@@ -77,6 +81,33 @@ class DocumentViewController: UIViewController {
         })
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        do {
+            let bookmarkData = try document.fileURL.bookmarkData()
+            
+            let userActivity = NSUserActivity(activityType: "com.changshen.Blocks.openDocument")
+            userActivity.title = "openDocument"
+            userActivity.userInfo = ["bookmark" : bookmarkData]
+            
+            view.window?.windowScene?.userActivity = userActivity
+            
+            print("encoded")
+            
+        } catch {
+            print("Cannot generate bookmark data \(error)")
+        }
+        
+        
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        view.window?.windowScene?.userActivity = nil
+    }
     
 }
 
@@ -92,6 +123,7 @@ extension DocumentViewController {
         print("👋 DismissDocumentViewController")
         self.document.close { (success) in
             self.dismiss(animated: true, completion: nil)
+            self.document.fileURL.stopAccessingSecurityScopedResource()
             if let completion = completion {
                 completion()
             }
@@ -125,9 +157,9 @@ extension DocumentViewController {
         blockView.addGestureRecognizer(tap)
         
         // Update Model
-        let block = Block.init(color: randomColor, center: randomCenter, identifier: UUID(), creationDate: Date(), modificationDate: Date(), usesRoundedCorners: false)
+        let block = Block.init(color: randomColor, center: randomCenter, uuid: UUID(), creationDate: Date(), modificationDate: Date(), usesRoundedCorners: false)
         print()
-        print("❇️Add button Pressed. New block UUID: \(block.identifier). Time: \(Date())")
+        print("❇️Add button Pressed. New block UUID: \(block.uuid). Time: \(Date())")
         document.addBlock(block)
         
         updateNavigationBarTitle()
@@ -218,7 +250,7 @@ extension DocumentViewController {
         guard let lastTappedBlockView = lastTappedBlockView else { fatalError() }
         guard let index = canvasView.subviews.firstIndex(of: lastTappedBlockView) else { fatalError() }
         guard let block = document.getBlock(at: index) else { fatalError() }
-        print("❌deleteMenuItemTapped index=\(index) UUID=\(block.identifier)")
+        print("❌deleteMenuItemTapped index=\(index) UUID=\(block.uuid)")
         document.deleteBlock(at: index)
         
         lastTappedBlockView.removeFromSuperview()
@@ -231,7 +263,7 @@ extension DocumentViewController {
         guard let lastTappedBlockView = lastTappedBlockView else { fatalError() }
         guard let index = canvasView.subviews.firstIndex(of: lastTappedBlockView) else { fatalError() }
         guard let block = document.getBlock(at: index) else { fatalError() }
-        print("⏹roundedCornerMenuItemTapped index=\(index) UUID=\(block.identifier)")
+        print("⏹roundedCornerMenuItemTapped index=\(index) UUID=\(block.uuid)")
         document.setBlockUsesRoundedCorners(at: index, !lastTappedBlockView.usesRoundedCorners)
         
         lastTappedBlockView.usesRoundedCorners = !lastTappedBlockView.usesRoundedCorners

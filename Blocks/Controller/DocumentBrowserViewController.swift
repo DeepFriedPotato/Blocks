@@ -152,8 +152,6 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         let documentNavigationViewController = storyBoard.instantiateViewController(withIdentifier: "DocumentNavigationViewController") as! UINavigationController
         let documentViewController = documentNavigationViewController.children.first! as! DocumentViewController
         
-        var document = Document(fileURL: documentURL)
-        print("FileManager.default.isWritableFile(atPath: document.fileURL.path) \(FileManager.default.isWritableFile(atPath: document.fileURL.path))")
         
         // When importing from external sources, the file is in Document/Inbox, which seems to be readonly.
 //        if !FileManager.default.isWritableFile(atPath: document.fileURL.path) {
@@ -173,7 +171,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
 //        }
         
         
-        documentViewController.setAndOpenDocument(document) {
+        documentViewController.setAndOpenDocumentURL(documentURL) {
             documentNavigationViewController.transitioningDelegate = self
             self.transitionController = self.transitionController(forDocumentAt: documentURL)
             self.transitionController?.targetView = documentViewController.canvasView
@@ -183,50 +181,50 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
             self.present(documentNavigationViewController, animated: animated, completion: nil)
         }
     }
-    
-    override func encodeRestorableState(with coder: NSCoder) {
-        print("encodeRestorableState")
-        if let documentViewController = documentViewController, let documentURL = documentViewController.document?.fileURL {
-            do {
-                let didStartAccessing = documentURL.startAccessingSecurityScopedResource()
-                defer {
-                    if didStartAccessing {
-                        documentURL.stopAccessingSecurityScopedResource()
-                    }
-                }
-                
-                if didStartAccessing {
-                    let bookmarkData = try documentURL.bookmarkData()
-                    coder.encode(bookmarkData, forKey: DocumentBrowserViewController.bookmarkDataKey)
-                    print("encoded")
-                }
-            } catch {
-                print("Cannot generate bookmark data \(error)")
-            }
-        } else {
-            print("No docuemntViewController to encode")
-        }
-        super.encodeRestorableState(with: coder)
-    }
-    
-    override func decodeRestorableState(with coder: NSCoder) {
-        print("decodeRestorableState")
-        if let bookmarkData = coder.decodeObject(of: NSData.self, forKey: DocumentBrowserViewController.bookmarkDataKey) as Data? {
-            do {
-                var bookmarkDataIsStale: Bool = false
-                let documentURL = try URL.init(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &bookmarkDataIsStale)
-                print("decoded")
-                presentDocument(at: documentURL, animated: false)
-                    
-                
-            } catch {
-                print("Cannot init URL from bookmark data \(error)")
-            }
-        } else {
-            print("No bookmarkData to decode")
-        }
-        super.decodeRestorableState(with: coder)
-    }
+//    
+//    override func encodeRestorableState(with coder: NSCoder) {
+//        print("encodeRestorableState")
+//        if let documentViewController = documentViewController, let documentURL = documentViewController.document?.fileURL {
+//            do {
+//                let didStartAccessing = documentURL.startAccessingSecurityScopedResource()
+//                defer {
+//                    if didStartAccessing {
+//                        documentURL.stopAccessingSecurityScopedResource()
+//                    }
+//                }
+//                
+//                if didStartAccessing {
+//                    let bookmarkData = try documentURL.bookmarkData()
+//                    coder.encode(bookmarkData, forKey: DocumentBrowserViewController.bookmarkDataKey)
+//                    print("encoded")
+//                }
+//            } catch {
+//                print("Cannot generate bookmark data \(error)")
+//            }
+//        } else {
+//            print("No docuemntViewController to encode")
+//        }
+//        super.encodeRestorableState(with: coder)
+//    }
+//    
+//    override func decodeRestorableState(with coder: NSCoder) {
+//        print("decodeRestorableState")
+//        if let bookmarkData = coder.decodeObject(of: NSData.self, forKey: DocumentBrowserViewController.bookmarkDataKey) as Data? {
+//            do {
+//                var bookmarkDataIsStale: Bool = false
+//                let documentURL = try URL.init(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &bookmarkDataIsStale)
+//                print("decoded")
+//                presentDocument(at: documentURL, animated: false)
+//                    
+//                
+//            } catch {
+//                print("Cannot init URL from bookmark data \(error)")
+//            }
+//        } else {
+//            print("No bookmarkData to decode")
+//        }
+//        super.decodeRestorableState(with: coder)
+//    }
     
     // MARK: UIDocumentPickerViewController Move To Service
     

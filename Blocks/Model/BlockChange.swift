@@ -16,11 +16,11 @@ enum BlockChange: CustomDebugStringConvertible {
     var debugDescription: String {
         switch self {
         case .insert(let block, let index):
-            return "Insert(\(block.identifier), \(index))"
+            return "Insert(\(block.uuid), \(index))"
         case .delete(let index):
             return "Delete(\(index))"
         case .modify(let newBlock, let index):
-            return "Modify(\(newBlock.identifier), \(index))"
+            return "Modify(\(newBlock.uuid), \(index))"
         }
     }
 }

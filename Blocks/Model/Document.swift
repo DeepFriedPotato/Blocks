@@ -12,13 +12,13 @@ class Document: UIDocument {
     
     struct BlocksBundle: Codable {
         let blocks: [Block]
-        let deletedBlocks: [DeletedBlock]
+        let deletedUUIDs: Set<UUID>
     }
     
     static let blocksChangedNotification: Notification.Name = Notification.Name("DocumentBlocksChangedNotification")
     
     private var blocks = [Block]()
-    private var deletedBlocks = [DeletedBlock]()
+    private var deletedUUIDs = Set<UUID>()
     private var blockChanges = [BlockChange]()
     private var shouldUpdateChangeCountOnNextStateChange = false
     
@@ -28,6 +28,8 @@ class Document: UIDocument {
     func finishedOpeningDocument() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.documentStateChanged), name: UIDocument.stateChangedNotification, object: nil)
     }
+    
+    
     
     @objc private func documentStateChanged(notification: Notification) {
         print()
@@ -48,23 +50,30 @@ class Document: UIDocument {
         
         let jsonEncoder = JSONEncoder()
         jsonEncoder.outputFormatting = .prettyPrinted
-        let data = try! jsonEncoder.encode(BlocksBundle(blocks: blocks, deletedBlocks: deletedBlocks))
+        let data = try! jsonEncoder.encode(BlocksBundle(blocks: blocks, deletedUUIDs: deletedUUIDs)) as NSData
+        
+        let compressedData = try data.compressed(using: .zlib)
+        
+        
         print()
-        print("✍️contents(forType:) Time: \(Date()) DEBUG: \(blocksDebugString(blocks: blocks)) DELETED: \(deletedBlocksDebugString(deletedBlocks: deletedBlocks))")
-        return data
+        print("✍️contents(forType:) Time: \(Date()) DEBUG: \(blocksDebugString(blocks: blocks)) DELETED: \(deletedBlocksDebugString(deletedUUIDs: deletedUUIDs))")
+        return compressedData
     }
     
     
     // Quick note: updateChangeCount does not work inside here.
     override func load(fromContents contents: Any, ofType typeName: String?) throws {
         // Load your document from contents
-        let data = contents as! Data
-        let jsonDecoder = JSONDecoder()
-        let decodedBundle = try jsonDecoder.decode(BlocksBundle.self, from: data)
-        let decodedBlocks = decodedBundle.blocks
-        let decodedDeletedBlocks = decodedBundle.deletedBlocks
+        let data = contents as! NSData
         
-        deletedBlocks = deletedBlocks.sortedMerge(with: decodedDeletedBlocks)
+        let decompressedData = try data.decompressed(using: .zlib) as Data
+        
+        let jsonDecoder = JSONDecoder()
+        let decodedBundle = try jsonDecoder.decode(BlocksBundle.self, from: decompressedData)
+        let decodedBlocks = decodedBundle.blocks
+        let decodedDeletedUUIDs = decodedBundle.deletedUUIDs
+        
+        deletedUUIDs = deletedUUIDs.union(decodedDeletedUUIDs)
         print()
         print("\(self.documentState.contains(.closed) ? "   " : "")📖load(fromContents:) Time: \(Date()) ")
         // May 15 5:29 PM
@@ -75,7 +84,7 @@ class Document: UIDocument {
             // May 15 5:29 PM. Attempting to merge within load(fromContents:)
             //blockChanges = findChange(old: blocks, new: decodedBlocks)
             
-            let merged = merge(first: blocks, second: decodedBlocks, deleted: deletedBlocks)
+            let merged = merge(first: blocks, second: decodedBlocks, deleted: deletedUUIDs)
             //print("📖Merged: \(blocksDebugString(blocks: merged))")
             
             blockChanges = findChange(old: blocks, new: merged)
@@ -103,6 +112,12 @@ class Document: UIDocument {
         
         
     }
+    
+    
+    override func handleError(_ error: Error, userInteractionPermitted: Bool) {
+        super.handleError(error, userInteractionPermitted: userInteractionPermitted)
+        print(error)
+    }
 }
 
 // Methods for Controller (API)
@@ -127,10 +142,8 @@ extension Document {
     func deleteBlock(at index: Int) {
         guard index >= 0 && index < blocks.count else { fatalError() }
         let blockToDelete = blocks[index]
-        // DeletedBlock is a structure containing only the UUID and creationDate of a Block, removing all other data.
-        let deletedBlock = DeletedBlock(from: blockToDelete)
-        let insertionIndex = deletedBlocks.insertionIndexOf(element: deletedBlock) { $0.creationDate < $1.creationDate } // Binary search insertion
-        deletedBlocks.insert(deletedBlock, at: insertionIndex)
+        
+        deletedUUIDs.insert(blockToDelete.uuid)
         
         blocks.remove(at: index)
         
@@ -172,31 +185,35 @@ extension Document {
     }
     
     func getBlock(at index: Int) -> Block? {
-        return blocks.value(at: index)
+        return (0 <= index && index < blocks.count) ? blocks[index] : nil
     }
 }
 
 extension Document {
     private func findChange(old: [Block], new: [Block]) -> [BlockChange] {
-        let patches = patch(from: old, to: new)
+        //let patches = patch(from: old, to: new)
+        
+        let patches = new.difference(from: old)
         var blockChanges = [BlockChange]()
+        
         for patch in patches {
             switch patch {
-            case .insertion(let index, let element):
-                blockChanges.append(BlockChange.insert(element, index))
-            case .deletion(let index):
-                blockChanges.append(BlockChange.delete(index))
+            case .insert(let offset, let element, _):
+                blockChanges.append(BlockChange.insert(element, offset))
+            case .remove(let offset, _, _):
+                blockChanges.append(BlockChange.delete(offset))
             }
         }
+        
         
         // Find modifications
         var newDictionary = [UUID:(Int,Block)]()
         for (index, newBlock) in new.enumerated() {
-            newDictionary[newBlock.identifier] = (index,newBlock)
+            newDictionary[newBlock.uuid] = (index,newBlock)
         }
         
         for oldBlock in old {
-            guard let (index,newBlock) = newDictionary[oldBlock.identifier] else { continue }   // If new does not contain oldBlock identifier, skip
+            guard let (index,newBlock) = newDictionary[oldBlock.uuid] else { continue }   // If new does not contain oldBlock identifier, skip
             if !newBlock.fullyEquals(other: oldBlock) {
                 blockChanges.append(BlockChange.modify(newBlock, index))
             }
@@ -232,7 +249,7 @@ extension Document {
             fileCoordinator.coordinate(readingItemAt: conflictVersion.url, options: [], error: &readingError) { (url) in
                 do {
                     try conflictDocument.read(from: conflictVersion.url)
-                    bundleVersions.append(BlocksBundle(blocks: conflictDocument.blocks, deletedBlocks: conflictDocument.deletedBlocks))
+                    bundleVersions.append(BlocksBundle(blocks: conflictDocument.blocks, deletedUUIDs: conflictDocument.deletedUUIDs))
                     //print("   Conflict document blocks: \(blocksDebugString(blocks: conflictDocument.blocks))")
                     print("   ===END OPENING CONFLICT DOCUMENT===")
                 } catch {
@@ -241,11 +258,11 @@ extension Document {
             }
         }
         
-        let result = BlocksBundle(blocks: self.blocks, deletedBlocks: self.deletedBlocks)
+        let result = BlocksBundle(blocks: self.blocks, deletedUUIDs: self.deletedUUIDs)
         let merged = bundleVersions.reduce(into: result) { (result, bundle) in
-            let mergedDeletedBlocks = result.deletedBlocks.sortedMerge(with: bundle.deletedBlocks)
-            let mergedBlocks = merge(first: result.blocks, second: bundle.blocks, deleted: mergedDeletedBlocks)
-            result = BlocksBundle(blocks: mergedBlocks, deletedBlocks: mergedDeletedBlocks)
+            let mergedDeletedUUIDs = result.deletedUUIDs.union(bundle.deletedUUIDs)
+            let mergedBlocks = merge(first: result.blocks, second: bundle.blocks, deleted: mergedDeletedUUIDs)
+            result = BlocksBundle(blocks: mergedBlocks, deletedUUIDs: mergedDeletedUUIDs)
         }
         
         
@@ -260,8 +277,8 @@ extension Document {
             print("   (🙋‍♂️)scheduled to updateChangeCount(.done) in load. blockChange is not empty")
         }
         
-        if (deletedBlocks != merged.deletedBlocks) {
-            deletedBlocks = merged.deletedBlocks
+        if (deletedUUIDs != merged.deletedUUIDs) {
+            deletedUUIDs = merged.deletedUUIDs
             shouldUpdateChangeCountOnNextStateChange = true
             print("   (🙋‍♂️)scheduled to updateChangeCount(.done) in load. deletedBlocks Updated")
         }
@@ -286,7 +303,7 @@ extension Document {
     }
     
     // https://stackoverflow.com/questions/51404787/how-to-merge-two-sorted-arrays-in-swift
-    func merge(first: [Block], second: [Block], deleted: [DeletedBlock]) -> [Block] {
+    func merge(first: [Block], second: [Block], deleted: Set<UUID>) -> [Block] {
         let all = first + second.reversed()
         let merged = all.reduce(into: (all, [Block]()), { (result, block) in
             guard let firstBlock = result.0.first else { return }
@@ -294,12 +311,12 @@ extension Document {
             
             if firstBlock.creationDate < lastBlock.creationDate {
                 result.0.removeFirst()
-                if deleted.binarySearch(key: DeletedBlock(from: firstBlock)) == nil {
+                if !deleted.contains(firstBlock.uuid) {
                     result.1.append(firstBlock)
                 }
             } else if firstBlock.creationDate > lastBlock.creationDate {
                 result.0.removeLast()
-                if deleted.binarySearch(key: DeletedBlock(from: lastBlock)) == nil {
+                if !deleted.contains(lastBlock.uuid) {
                     result.1.append(lastBlock)
                 }
             } else {
@@ -307,7 +324,7 @@ extension Document {
                 if result.0.count >= 1 && firstBlock == lastBlock {    // Last one only need to be removed once.
                     result.0.removeLast()
                 }
-                if deleted.binarySearch(key: DeletedBlock(from: firstBlock)) == nil {
+                if !deleted.contains(firstBlock.uuid) {
                     // Append the version with the latest modification date.
                     let useFirstBlock = firstBlock.modificationDate > lastBlock.modificationDate
                     result.1.append(useFirstBlock ? firstBlock : lastBlock)
@@ -318,7 +335,7 @@ extension Document {
         print("   ===🥣MERGE🥣===")
         print("      First: \(blocksDebugString(blocks: first))")
         print("      Second: \(blocksDebugString(blocks: second))")
-        print("      Deleted: \(deletedBlocksDebugString(deletedBlocks: deleted))")
+        print("      Deleted: \(deletedBlocksDebugString(deletedUUIDs: deleted))")
         print("      Merged: \(blocksDebugString(blocks: merged))")
         print("   ===END MERGE===")
         print()
@@ -329,13 +346,13 @@ extension Document {
 // Debug string for blocks
 extension Document {
     func blocksDebugString() -> String {
-        return "BLOCKS: " + blocksDebugString(blocks: self.blocks) + " DELETED: " + deletedBlocksDebugString(deletedBlocks: self.deletedBlocks)
+        return "BLOCKS: " + blocksDebugString(blocks: self.blocks) + " DELETED: " + deletedBlocksDebugString(deletedUUIDs: self.deletedUUIDs)
     }
     private func blocksDebugString(blocks: [Block]) -> String {
-        return blocks.map{$0.identifier.uuidString}.reduce("Count: \(blocks.count), UUIDs: {", {$0 + $1 + ", "}) + "}"
+        return blocks.map{$0.uuid.uuidString}.reduce("Count: \(blocks.count), UUIDs: {", {$0 + $1 + ", "}) + "}"
     }
-    private func deletedBlocksDebugString(deletedBlocks: [DeletedBlock]) -> String {
-        return deletedBlocks.map{$0.identifier.uuidString}.reduce("Count: \(deletedBlocks.count), UUIDs: {", {$0 + $1 + ", "}) + "}"
+    private func deletedBlocksDebugString(deletedUUIDs: Set<UUID>) -> String {
+        return deletedUUIDs.map{$0.uuidString}.reduce("Count: \(deletedUUIDs.count), UUIDs: {", {$0 + $1 + ", "}) + "}"
     }
     
     func documentStateString() -> String {
