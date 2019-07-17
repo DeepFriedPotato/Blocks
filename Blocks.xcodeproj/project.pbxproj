@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B000D8D322DEC185001C2772 /* DocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05CFC9122DDC10000EA8D6B /* DocumentManager.swift */; };
 		B00CD22622D47551000EDB9F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00CD22522D47551000EDB9F /* SceneDelegate.swift */; };
 		B0323B4B2297DFB500802442 /* ThumbnailProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0323B4A2297DFB500802442 /* ThumbnailProvider.swift */; };
 		B0323B4F2297DFB500802442 /* BlocksThumbnailExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B0323B482297DFB500802442 /* BlocksThumbnailExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -25,6 +26,7 @@
 		B0462B192282BC69000522BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0462B172282BC69000522BB /* LaunchScreen.storyboard */; };
 		B0462B242282BC69000522BB /* BlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0462B232282BC69000522BB /* BlocksTests.swift */; };
 		B0462B2F2282BC69000522BB /* BlocksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0462B2E2282BC69000522BB /* BlocksUITests.swift */; };
+		B05CFC9222DDC10000EA8D6B /* DocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05CFC9122DDC10000EA8D6B /* DocumentManager.swift */; };
 		B0E0E2622287E544007E95D1 /* BlockChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E0E2612287E544007E95D1 /* BlockChange.swift */; };
 		B0E426DA229926850078564A /* ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E426D9229926850078564A /* ShowAlert.swift */; };
 		B0E426DB229928310078564A /* ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E426D9229926850078564A /* ShowAlert.swift */; };
@@ -91,6 +93,7 @@
 		B0462B2A2282BC69000522BB /* BlocksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0462B2E2282BC69000522BB /* BlocksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksUITests.swift; sourceTree = "<group>"; };
 		B0462B302282BC69000522BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B05CFC9122DDC10000EA8D6B /* DocumentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentManager.swift; sourceTree = "<group>"; };
 		B0E0E2612287E544007E95D1 /* BlockChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockChange.swift; sourceTree = "<group>"; };
 		B0E426D9229926850078564A /* ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlert.swift; sourceTree = "<group>"; };
 		B0EB13A422850091002C326A /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
@@ -167,6 +170,7 @@
 			children = (
 				B0462B0A2282BC67000522BB /* AppDelegate.swift */,
 				B00CD22522D47551000EDB9F /* SceneDelegate.swift */,
+				B05CFC9122DDC10000EA8D6B /* DocumentManager.swift */,
 				B0EB13E522855BA6002C326A /* Model */,
 				B0EB13E422855B96002C326A /* Controller */,
 				B0EB13E622855BC0002C326A /* View */,
@@ -394,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0E426DB229928310078564A /* ShowAlert.swift in Sources */,
+				B000D8D322DEC185001C2772 /* DocumentManager.swift in Sources */,
 				B0323B5B2297E75600802442 /* BlockChange.swift in Sources */,
 				B0323B592297E74200802442 /* Block.swift in Sources */,
 				B0323B562297E71D00802442 /* BlockView.swift in Sources */,
@@ -412,6 +417,7 @@
 				B0462B0F2282BC67000522BB /* DocumentViewController.swift in Sources */,
 				B0EB13EA22856CED002C326A /* Color.swift in Sources */,
 				B0EB13A522850091002C326A /* BlockView.swift in Sources */,
+				B05CFC9222DDC10000EA8D6B /* DocumentManager.swift in Sources */,
 				B0EB13E8228562F4002C326A /* Block.swift in Sources */,
 				B0E0E2622287E544007E95D1 /* BlockChange.swift in Sources */,
 				B00CD22622D47551000EDB9F /* SceneDelegate.swift in Sources */,

@@ -9,9 +9,10 @@
 import Foundation
 
 enum BlockChange: CustomDebugStringConvertible {
-    case insert(Block, Int)
-    case delete(Int)
-    case modify(Block, Int)
+    case insert(block: Block, index: Int)
+    case delete(index: Int)
+    case modify(block: Block, index: Int)
+    
     
     var debugDescription: String {
         switch self {

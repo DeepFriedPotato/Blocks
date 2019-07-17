@@ -170,16 +170,21 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
 //            }
 //        }
         
-        
-        documentViewController.setAndOpenDocumentURL(documentURL) {
-            documentNavigationViewController.transitioningDelegate = self
-            self.transitionController = self.transitionController(forDocumentAt: documentURL)
-            self.transitionController?.targetView = documentViewController.canvasView
-            
-            documentNavigationViewController.modalPresentationStyle = .fullScreen
-            
-            self.present(documentNavigationViewController, animated: animated, completion: nil)
+        DocumentManager.shared.openDocumentIfNecessary(url: documentURL, presenterUUID: documentViewController.documentPresentationUUID) { (document) in
+            if let document = document {
+                // Configure documentViewContrroller
+                documentViewController.configureUsingDocument(document: document)
+                
+                documentNavigationViewController.transitioningDelegate = self
+                self.transitionController = self.transitionController(forDocumentAt: documentURL)
+                self.transitionController?.targetView = documentViewController.canvasView
+                
+                documentNavigationViewController.modalPresentationStyle = .fullScreen
+                
+                self.present(documentNavigationViewController, animated: animated, completion: nil)
+            }
         }
+        
     }
 //    
 //    override func encodeRestorableState(with coder: NSCoder) {

@@ -14,6 +14,7 @@ class DocumentViewController: UIViewController {
     static let canvasSize = CGSize(width: 320, height: 320)
     
     private(set) var document: Document!
+    var documentPresentationUUID = UUID()
     
     var lastTappedBlockView: BlockView?
     
@@ -34,52 +35,70 @@ class DocumentViewController: UIViewController {
         view.addGestureRecognizer(pinchGesture)
     }
     
-    func setAndOpenDocumentURL(_ url: URL, completion: @escaping () -> Void) {
+    func configureUsingDocument(document: Document) {
         loadViewIfNeeded()
+        self.document = document
+        document.notificationCenter.addObserver(self, selector: #selector(blocksChanged(notfication:)), name: Document.blocksChangedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(documentStateChanged(notification:)), name: UIDocument.stateChangedNotification, object: nil)
         
-        url.startAccessingSecurityScopedResource()
-        
-        self.document = Document(fileURL: url)
-        
-        print("FileManager.default.isWritableFile(atPath: document.fileURL.path) \(FileManager.default.isWritableFile(atPath: document.fileURL.path))")
-        
-        
-        
-        document.open(completionHandler: { [unowned self] (success) in
-            if success {
-                print()
-                print("🎉Document open success")
-                print("FileManager.default.isWritableFile(atPath: document.fileURL.path) \(FileManager.default.isWritableFile(atPath: self.document.fileURL.path))")
-                self.document.blocksIterator().forEach({ (block) in
-                    let blockView = BlockView(color: block.color.uiColor)
-                    blockView.center = block.center
-                    blockView.usesRoundedCorners = block.usesRoundedCorners
-                    self.canvasView.addSubview(blockView)
-                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.blockTapped))
-                    blockView.addGestureRecognizer(tap)
-                })
-                print("   " + self.document.blocksDebugString())
-                
-                NotificationCenter.default.addObserver(self, selector: #selector(self.documentStateChanged), name: UIDocument.stateChangedNotification, object: nil)
-                NotificationCenter.default.addObserver(self, selector: #selector(self.blocksChanged), name: Document.blocksChangedNotification, object: nil)
-                self.updateNavigationBarTitle()
-                
-                if self.document.documentState.contains(.inConflict) {
-                    self.document.resolveConflict()
-                }
-                
-                
-                // Yuck. Can't put it in Document.init(), so I guess its goes here.
-                self.document.finishedOpeningDocument()
-                completion()
-                
-            } else {
-                // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
-                print("Failed to open document")
-                showAlert(presentingViewController: self, title: "Failed to open document")
-            }
+        self.document.blocksIterator().forEach({ (block) in
+            let blockView = BlockView(color: block.color.uiColor)
+            blockView.center = block.center
+            blockView.usesRoundedCorners = block.usesRoundedCorners
+            self.canvasView.addSubview(blockView)
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.blockTapped))
+            blockView.addGestureRecognizer(tap)
         })
+        print("   " + self.document.blocksDebugString())
     }
+    
+//
+//    func setAndOpenDocumentURL(_ url: URL, completion: @escaping () -> Void) {
+//        loadViewIfNeeded()
+//
+//        url.startAccessingSecurityScopedResource()
+//
+//        self.document = Document(fileURL: url)
+//
+//        print("FileManager.default.isWritableFile(atPath: document.fileURL.path) \(FileManager.default.isWritableFile(atPath: document.fileURL.path))")
+//
+//
+//
+//        document.open(completionHandler: { [unowned self] (success) in
+//            if success {
+//                print()
+//                print("🎉Document open success")
+//                print("FileManager.default.isWritableFile(atPath: document.fileURL.path) \(FileManager.default.isWritableFile(atPath: self.document.fileURL.path))")
+//                self.document.blocksIterator().forEach({ (block) in
+//                    let blockView = BlockView(color: block.color.uiColor)
+//                    blockView.center = block.center
+//                    blockView.usesRoundedCorners = block.usesRoundedCorners
+//                    self.canvasView.addSubview(blockView)
+//                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.blockTapped))
+//                    blockView.addGestureRecognizer(tap)
+//                })
+//                print("   " + self.document.blocksDebugString())
+//
+//                NotificationCenter.default.addObserver(self, selector: #selector(self.documentStateChanged), name: UIDocument.stateChangedNotification, object: nil)
+//                NotificationCenter.default.addObserver(self, selector: #selector(self.blocksChanged), name: Document.blocksChangedNotification, object: nil)
+//                self.updateNavigationBarTitle()
+//
+//                if self.document.documentState.contains(.inConflict) {
+//                    self.document.resolveConflict()
+//                }
+//
+//
+//                // Yuck. Can't put it in Document.init(), so I guess its goes here.
+//                self.document.finishedOpeningDocument()
+//                completion()
+//
+//            } else {
+//                // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
+//                print("Failed to open document")
+//                showAlert(presentingViewController: self, title: "Failed to open document")
+//            }
+//        })
+//    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -121,13 +140,12 @@ extension DocumentViewController {
     func dismissDocumentViewController(completion: (() -> Void)? = nil) {
         print()
         print("👋 DismissDocumentViewController")
-        self.document.close { (success) in
+        
+        DocumentManager.shared.closeDocumentIfNecessary(url: document.fileURL, presenterUUID: documentPresentationUUID) { (success) in
             self.dismiss(animated: true, completion: nil)
-            self.document.fileURL.stopAccessingSecurityScopedResource()
-            if let completion = completion {
-                completion()
-            }
         }
+        
+        
     }
     
     @objc func pinchGestureUpdated(gr: UIPinchGestureRecognizer) {
@@ -143,18 +161,12 @@ extension DocumentViewController {
         let randomColor = Color.random()
         
         
-        // Update View
-        let blockView = BlockView(color: randomColor.uiColor)
         let halfWidth = BlockView.sideLength / 2.0
         //let topInset = view.safeAreaInsets.top
         let canvasSize = DocumentViewController.canvasSize
         //let randomCenter = CGPoint(x: .random(in: halfWidth...(canvasSize.width - halfWidth)), y: .random(in: (halfWidth + topInset)...(canvasSize.height - halfWidth)))
         let randomCenter = CGPoint(x: .random(in: halfWidth...(canvasSize.width - halfWidth)), y: .random(in: halfWidth...(canvasSize.height - halfWidth)))
-        blockView.center = randomCenter
-        canvasView.addSubview(blockView)
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.blockTapped))
-        blockView.addGestureRecognizer(tap)
+
         
         // Update Model
         let block = Block.init(color: randomColor, center: randomCenter, uuid: UUID(), creationDate: Date(), modificationDate: Date(), usesRoundedCorners: false)
@@ -253,7 +265,7 @@ extension DocumentViewController {
         print("❌deleteMenuItemTapped index=\(index) UUID=\(block.uuid)")
         document.deleteBlock(at: index)
         
-        lastTappedBlockView.removeFromSuperview()
+        
         self.lastTappedBlockView = nil
         
         updateNavigationBarTitle()
@@ -266,7 +278,6 @@ extension DocumentViewController {
         print("⏹roundedCornerMenuItemTapped index=\(index) UUID=\(block.uuid)")
         document.setBlockUsesRoundedCorners(at: index, !lastTappedBlockView.usesRoundedCorners)
         
-        lastTappedBlockView.usesRoundedCorners = !lastTappedBlockView.usesRoundedCorners
         self.lastTappedBlockView = nil
     }
 }

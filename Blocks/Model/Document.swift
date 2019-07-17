@@ -17,6 +17,9 @@ class Document: UIDocument {
     
     static let blocksChangedNotification: Notification.Name = Notification.Name("DocumentBlocksChangedNotification")
     
+    // Observe this notificationCenter for document changes
+    let notificationCenter = NotificationCenter()
+    
     private var blocks = [Block]()
     private var deletedUUIDs = Set<UUID>()
     private var blockChanges = [BlockChange]()
@@ -25,7 +28,7 @@ class Document: UIDocument {
     
     
     // Called by View Controller
-    func finishedOpeningDocument() {
+    func startObservingDocumentStateNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.documentStateChanged), name: UIDocument.stateChangedNotification, object: nil)
     }
     
@@ -96,7 +99,7 @@ class Document: UIDocument {
                 //print("   OLD BLOCKS: \(blocksDebugString(blocks: blocks))")
                 blocks = merged
                 // Send notification
-                NotificationCenter.default.post(name: Document.blocksChangedNotification, object: nil)
+                notificationCenter.post(name: Document.blocksChangedNotification, object: nil)
                 
                 if (decodedBlocks != merged) {
                     shouldUpdateChangeCountOnNextStateChange = true
@@ -125,6 +128,13 @@ extension Document {
     func addBlock(_ block: Block) {
         blocks.append(block)
         
+        
+        // FIXME: index???
+        blockChanges = [BlockChange.insert(block: block, index: blocks.count)]
+        
+        notificationCenter.post(name: Document.blocksChangedNotification, object: nil)
+        
+        
         if documentState.contains(.editingDisabled) {
             shouldUpdateChangeCountOnNextStateChange = true
             print("   (🙋‍♂️)scheduled to updateChangeCount(.done) because new block is added")
@@ -147,6 +157,9 @@ extension Document {
         
         blocks.remove(at: index)
         
+        blockChanges = [BlockChange.delete(index: index)]
+        notificationCenter.post(name: Document.blocksChangedNotification, object: nil)
+        
         if documentState.contains(.editingDisabled) {
             shouldUpdateChangeCountOnNextStateChange = true
             print("   (🙋‍♂️)scheduled to updateChangeCount(.done) because a block is deleted")
@@ -161,6 +174,9 @@ extension Document {
         guard index >= 0 && index < blocks.count else { fatalError() }
         blocks[index].usesRoundedCorners = usesRoundedCorners
         blocks[index].modificationDate = Date()
+        
+        blockChanges = [BlockChange.modify(block: blocks[index], index: index)]
+        notificationCenter.post(name: Document.blocksChangedNotification, object: nil)
         
         if documentState.contains(.editingDisabled) {
             shouldUpdateChangeCountOnNextStateChange = true
@@ -199,9 +215,9 @@ extension Document {
         for patch in patches {
             switch patch {
             case .insert(let offset, let element, _):
-                blockChanges.append(BlockChange.insert(element, offset))
+                blockChanges.append(BlockChange.insert(block: element, index: offset))
             case .remove(let offset, _, _):
-                blockChanges.append(BlockChange.delete(offset))
+                blockChanges.append(BlockChange.delete(index: offset))
             }
         }
         
@@ -215,7 +231,7 @@ extension Document {
         for oldBlock in old {
             guard let (index,newBlock) = newDictionary[oldBlock.uuid] else { continue }   // If new does not contain oldBlock identifier, skip
             if !newBlock.fullyEquals(other: oldBlock) {
-                blockChanges.append(BlockChange.modify(newBlock, index))
+                blockChanges.append(BlockChange.modify(block: newBlock, index: index))
             }
         }
         
@@ -271,7 +287,7 @@ extension Document {
         print("   Reminder: Current blocks: \(blocksDebugString(blocks: blocks))")
         if !blockChanges.isEmpty {
             // Send notification
-            NotificationCenter.default.post(name: Document.blocksChangedNotification, object: nil)
+            notificationCenter.post(name: Document.blocksChangedNotification, object: nil)
             blocks = merged.blocks // Only update blocks if there are changes
             shouldUpdateChangeCountOnNextStateChange = true
             print("   (🙋‍♂️)scheduled to updateChangeCount(.done) in load. blockChange is not empty")
