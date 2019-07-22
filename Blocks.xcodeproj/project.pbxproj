@@ -33,6 +33,8 @@
 		B0EB13A522850091002C326A /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13A422850091002C326A /* BlockView.swift */; };
 		B0EB13E8228562F4002C326A /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13E7228562F4002C326A /* Block.swift */; };
 		B0EB13EA22856CED002C326A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB13E922856CED002C326A /* Color.swift */; };
+		B0FB458322E070C60019272D /* UndoManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FB458222E070C60019272D /* UndoManagerExtension.swift */; };
+		B0FB458422E0711E0019272D /* UndoManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FB458222E070C60019272D /* UndoManagerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +101,7 @@
 		B0EB13A422850091002C326A /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		B0EB13E7228562F4002C326A /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		B0EB13E922856CED002C326A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		B0FB458222E070C60019272D /* UndoManagerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoManagerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +149,6 @@
 			isa = PBXGroup;
 			children = (
 				B0462B092282BC67000522BB /* Blocks */,
-				B0462B122282BC67000522BB /* Main.storyboard */,
 				B0462B222282BC69000522BB /* BlocksTests */,
 				B0462B2D2282BC69000522BB /* BlocksUITests */,
 				B0323B492297DFB500802442 /* BlocksThumbnailExtension */,
@@ -171,6 +173,7 @@
 				B0462B0A2282BC67000522BB /* AppDelegate.swift */,
 				B00CD22522D47551000EDB9F /* SceneDelegate.swift */,
 				B05CFC9122DDC10000EA8D6B /* DocumentManager.swift */,
+				B0462B122282BC67000522BB /* Main.storyboard */,
 				B0EB13E522855BA6002C326A /* Model */,
 				B0EB13E422855B96002C326A /* Controller */,
 				B0EB13E622855BC0002C326A /* View */,
@@ -232,6 +235,7 @@
 			children = (
 				B0EB13E922856CED002C326A /* Color.swift */,
 				B0E426D9229926850078564A /* ShowAlert.swift */,
+				B0FB458222E070C60019272D /* UndoManagerExtension.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -398,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0E426DB229928310078564A /* ShowAlert.swift in Sources */,
+				B0FB458422E0711E0019272D /* UndoManagerExtension.swift in Sources */,
 				B000D8D322DEC185001C2772 /* DocumentManager.swift in Sources */,
 				B0323B5B2297E75600802442 /* BlockChange.swift in Sources */,
 				B0323B592297E74200802442 /* Block.swift in Sources */,
@@ -420,6 +425,7 @@
 				B05CFC9222DDC10000EA8D6B /* DocumentManager.swift in Sources */,
 				B0EB13E8228562F4002C326A /* Block.swift in Sources */,
 				B0E0E2622287E544007E95D1 /* BlockChange.swift in Sources */,
+				B0FB458322E070C60019272D /* UndoManagerExtension.swift in Sources */,
 				B00CD22622D47551000EDB9F /* SceneDelegate.swift in Sources */,
 				B0462B0D2282BC67000522BB /* DocumentBrowserViewController.swift in Sources */,
 				B0462B0B2282BC67000522BB /* AppDelegate.swift in Sources */,

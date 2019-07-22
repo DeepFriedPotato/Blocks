@@ -23,7 +23,6 @@ class Document: UIDocument {
     private var blocks = [Block]()
     private var deletedUUIDs = Set<UUID>()
     private var blockChanges = [BlockChange]()
-    private var shouldUpdateChangeCountOnNextStateChange = false
     
     
     
@@ -37,11 +36,6 @@ class Document: UIDocument {
     @objc private func documentStateChanged(notification: Notification) {
         print()
         print(" 🔀documentStateChanged: \(documentStateString())           [\(hasUnsavedChanges ? "hasUnsavedChanges💾" : "nothingToSave🤷‍♂️")]")
-        if shouldUpdateChangeCountOnNextStateChange && !documentState.contains(.editingDisabled){
-            print("   🙋‍♂️updateChangeCount(.done) due to shouldUpdateChangeCountOnNextStateChange")
-            updateChangeCount(.done)
-            shouldUpdateChangeCountOnNextStateChange = false
-        }
         if documentState.contains(.inConflict) {
             resolveConflict()
         }
@@ -64,7 +58,6 @@ class Document: UIDocument {
     }
     
     
-    // Quick note: updateChangeCount does not work inside here.
     override func load(fromContents contents: Any, ofType typeName: String?) throws {
         // Load your document from contents
         let data = contents as! NSData
@@ -101,10 +94,6 @@ class Document: UIDocument {
                 // Send notification
                 notificationCenter.post(name: Document.blocksChangedNotification, object: nil)
                 
-                if (decodedBlocks != merged) {
-                    shouldUpdateChangeCountOnNextStateChange = true
-                    print("   (🙋‍♂️)scheduled to updateChangeCount(.done) in load. blockChange is not empty")
-                }
             }
             
             
@@ -125,49 +114,30 @@ class Document: UIDocument {
 
 // Methods for Controller (API)
 extension Document {
-    func addBlock(_ block: Block) {
-        blocks.append(block)
+    func addBlock(_ block: Block, atIndex index: Int? = nil) {
         
+        blockChanges = [BlockChange.insert(block: block, index: index ?? blocks.count)]
         
-        // FIXME: index???
-        blockChanges = [BlockChange.insert(block: block, index: blocks.count)]
+        blocks.insert(block, at: index ?? blocks.count)
         
         notificationCenter.post(name: Document.blocksChangedNotification, object: nil)
         
         
-        if documentState.contains(.editingDisabled) {
-            shouldUpdateChangeCountOnNextStateChange = true
-            print("   (🙋‍♂️)scheduled to updateChangeCount(.done) because new block is added")
-        } else {
-            updateChangeCount(.done)
-            print("   🙋‍♂️updateChangeCount(.done) because new block is added")
-
-        }
-        
-        if (documentState.contains(.editingDisabled)) {
-            print("   ‼️‼️Attempting to updateChangeCount when .editingDisabled‼️‼️")
-        }
     }
     
-    func deleteBlock(at index: Int) {
+    func deleteBlock(at index: Int, addToDeletedUUIDs: Bool = true) {
         guard index >= 0 && index < blocks.count else { fatalError() }
         let blockToDelete = blocks[index]
         
-        deletedUUIDs.insert(blockToDelete.uuid)
+        if addToDeletedUUIDs {
+            deletedUUIDs.insert(blockToDelete.uuid)
+        }
         
         blocks.remove(at: index)
         
         blockChanges = [BlockChange.delete(index: index)]
         notificationCenter.post(name: Document.blocksChangedNotification, object: nil)
         
-        if documentState.contains(.editingDisabled) {
-            shouldUpdateChangeCountOnNextStateChange = true
-            print("   (🙋‍♂️)scheduled to updateChangeCount(.done) because a block is deleted")
-        } else {
-            updateChangeCount(.done)
-            print("   🙋‍♂️updateChangeCount(.done) because a block is deleted")
-            
-        }
     }
     
     func setBlockUsesRoundedCorners(at index: Int, _ usesRoundedCorners: Bool) {
@@ -178,14 +148,10 @@ extension Document {
         blockChanges = [BlockChange.modify(block: blocks[index], index: index)]
         notificationCenter.post(name: Document.blocksChangedNotification, object: nil)
         
-        if documentState.contains(.editingDisabled) {
-            shouldUpdateChangeCountOnNextStateChange = true
-            print("   (🙋‍♂️)scheduled to updateChangeCount(.done) because a block is modified")
-        } else {
-            updateChangeCount(.done)
-            print("   🙋‍♂️updateChangeCount(.done) because a block is modified")
-            
-        }
+    }
+    
+    func removeDeletedUUID(uuid: UUID) {
+        deletedUUIDs.remove(uuid)
     }
     
     func blocksIterator() -> IndexingIterator<[Block]> {
@@ -289,14 +255,10 @@ extension Document {
             // Send notification
             notificationCenter.post(name: Document.blocksChangedNotification, object: nil)
             blocks = merged.blocks // Only update blocks if there are changes
-            shouldUpdateChangeCountOnNextStateChange = true
-            print("   (🙋‍♂️)scheduled to updateChangeCount(.done) in load. blockChange is not empty")
         }
         
         if (deletedUUIDs != merged.deletedUUIDs) {
             deletedUUIDs = merged.deletedUUIDs
-            shouldUpdateChangeCountOnNextStateChange = true
-            print("   (🙋‍♂️)scheduled to updateChangeCount(.done) in load. deletedBlocks Updated")
         }
         
         

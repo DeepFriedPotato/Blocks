@@ -13,6 +13,10 @@ class DocumentViewController: UIViewController {
     var canvasView: UIView!
     static let canvasSize = CGSize(width: 320, height: 320)
     
+    
+    @IBOutlet weak var undoButton: UIBarButtonItem!
+    @IBOutlet weak var redoButton: UIBarButtonItem!
+    
     private(set) var document: Document!
     var documentPresentationUUID = UUID()
     
@@ -33,6 +37,10 @@ class DocumentViewController: UIViewController {
         
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchGestureUpdated))
         view.addGestureRecognizer(pinchGesture)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUndoAndRedoButtons), name: Notification.Name.NSUndoManagerCheckpoint, object: nil)
+        undoButton.isEnabled = false
+        redoButton.isEnabled = false
     }
     
     func configureUsingDocument(document: Document) {
@@ -172,71 +180,31 @@ extension DocumentViewController {
         let block = Block.init(color: randomColor, center: randomCenter, uuid: UUID(), creationDate: Date(), modificationDate: Date(), usesRoundedCorners: false)
         print()
         print("❇️Add button Pressed. New block UUID: \(block.uuid). Time: \(Date())")
-        document.addBlock(block)
         
-        updateNavigationBarTitle()
+        let addedBlockIndex = document.getNumberOfBlocks()
+        document.undoManager.undoablyDo({ [unowned self] in
+            self.document.addBlock(block)
+        }, undoClosure: { [unowned self] in
+            self.document.deleteBlock(at: addedBlockIndex, addToDeletedUUIDs: false)
+        })
+        
     }
     
-    @IBAction func debugButtonPressed(_ sender: UIBarButtonItem) {
-
-        print("==DEBUG==")
-        print("NSFileVersion CURRENT")
-        let currentVersion = NSFileVersion.currentVersionOfItem(at: document.fileURL)!
-        print(currentVersion)
-        print("isConflict: \(currentVersion.isConflict)")
-        print("modificationDate: \(currentVersion.modificationDate!)")
-        print("URL: \(currentVersion.url)")
-        print("Current blocks")
-        print(document.blocksDebugString())
-        print("currentVersion URL matches document URL: \(currentVersion.url == document.fileURL)")
-        print("document.fileURL: \(document.fileURL)")
+    
+    @IBAction func undoButtonTapped(_ sender: UIBarButtonItem) {
+        document.undoManager.undo()
         
-        print("===")
-        let conflictVersions = NSFileVersion.unresolvedConflictVersionsOfItem(at: document.fileURL)!
-        print("unresolvedConflictVersions Count: \(conflictVersions.count)")
-        for conflictVersion in conflictVersions {
-            print("(")
-            print(conflictVersion)
-            print("isConflict: \(conflictVersion.isConflict)")
-            print("modificationDate: \(conflictVersion.modificationDate!)")
-            print("URL: \(conflictVersion.url)")
-            print(")")
-        }
+    }
+    
+    
+    @IBAction func redoButtonTapped(_ sender: UIBarButtonItem) {
+        document.undoManager.redo()
         
-        
-        print("Attempting to open first of conflictVersions")
-        if let conflictVersion = conflictVersions.first {
-            let conflictDocument = Document(fileURL: conflictVersion.url)
-            print("conflictDocument state: \(conflictDocument.documentState.debugDescription)")
-            /*
-            conflictDocument.open { (success) in
-                print("Conflict document opened success: \(success)")
-                print("conflictDocument state: \(conflictDocument.documentState.debugDescription)")
-                if success {
-                    print("Conflict document blocks:")
-                    print(conflictDocument.blocksDebugString())
-                    conflictDocument.close(completionHandler: { (closeSuccess) in
-                        print("Conflict document closed success: \(closeSuccess)")
-                        print("==END DEBUG==")
-                    })
-                } else {
-                    print("==END DEBUG==")
-                }
-            }
-            */
-            
-            do {
-                try conflictDocument.read(from: conflictVersion.url)
-                print("READ from conflictDocument")
-                print("conflictDocument state: \(conflictDocument.documentState.debugDescription)")
-                print("Conflict document blocks:")
-                print(conflictDocument.blocksDebugString())
-            } catch {
-                print("Failed to read from conflictDocument. Error \(error)")
-            }
-        }
-        
-        print("==END DEBUG==")
+    }
+    
+    @objc func updateUndoAndRedoButtons() {
+        undoButton.isEnabled = document.undoManager.canUndo
+        redoButton.isEnabled = document.undoManager.canRedo
     }
     
     @objc func blockTapped(gr: UITapGestureRecognizer) {
@@ -263,12 +231,18 @@ extension DocumentViewController {
         guard let index = canvasView.subviews.firstIndex(of: lastTappedBlockView) else { fatalError() }
         guard let block = document.getBlock(at: index) else { fatalError() }
         print("❌deleteMenuItemTapped index=\(index) UUID=\(block.uuid)")
-        document.deleteBlock(at: index)
+        
+        document.undoManager.undoablyDo({ [unowned self] in
+            self.document.deleteBlock(at: index)
+        }, undoClosure: { [unowned self] in
+            self.document.removeDeletedUUID(uuid: block.uuid)
+            self.document.addBlock(block, atIndex: index)
+        })
+        
         
         
         self.lastTappedBlockView = nil
         
-        updateNavigationBarTitle()
     }
     
     @objc func roundedCornersMenuItemTapped() {
@@ -276,7 +250,14 @@ extension DocumentViewController {
         guard let index = canvasView.subviews.firstIndex(of: lastTappedBlockView) else { fatalError() }
         guard let block = document.getBlock(at: index) else { fatalError() }
         print("⏹roundedCornerMenuItemTapped index=\(index) UUID=\(block.uuid)")
-        document.setBlockUsesRoundedCorners(at: index, !lastTappedBlockView.usesRoundedCorners)
+        
+        let currentUsesRoundedCorners = lastTappedBlockView.usesRoundedCorners
+        
+        document.undoManager.undoablyDo({ [unowned self] in
+            self.document.setBlockUsesRoundedCorners(at: index, !currentUsesRoundedCorners)
+        }, undoClosure: { [unowned self] in
+            self.document.setBlockUsesRoundedCorners(at: index, currentUsesRoundedCorners)
+        })
         
         self.lastTappedBlockView = nil
     }
