@@ -13,3 +13,4 @@ Blocks is a document-based iOS app in which users add, remove and modify colorfu
   - Supports automatic conflict resolution through a pseudo-CRDT document format.
   - Remote updates are reflected in an open document through diffing.
 * Undo/redo support
+* Thumbnail extension
