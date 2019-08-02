@@ -38,9 +38,7 @@ class DocumentViewController: UIViewController {
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchGestureUpdated))
         view.addGestureRecognizer(pinchGesture)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateUndoAndRedoButtons), name: Notification.Name.NSUndoManagerCheckpoint, object: nil)
-        undoButton.isEnabled = false
-        redoButton.isEnabled = false
+
     }
     
     func configureUsingDocument(document: Document) {
@@ -58,6 +56,10 @@ class DocumentViewController: UIViewController {
             blockView.addGestureRecognizer(tap)
         })
         print("   " + self.document.blocksDebugString())
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUndoAndRedoButtons), name: Notification.Name.NSUndoManagerCheckpoint, object: nil)
+        undoButton.isEnabled = document.undoManager.canUndo
+        redoButton.isEnabled = document.undoManager.canRedo
     }
     
 //

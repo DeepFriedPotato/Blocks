@@ -16,12 +16,11 @@ class DocumentManager {
     
     func openDocumentIfNecessary(url: URL, presenterUUID: UUID, completionHandler: @escaping (Document?) -> Void) {
         _ = url.startAccessingSecurityScopedResource()
-        let resolvedURL = url.resolvingSymlinksInPath()
-        let documentAlreadyOpen = managedDocuments.map {$0.document.fileURL}.contains(resolvedURL)
+        let documentAlreadyOpen = managedDocuments.map {$0.document.fileURL}.contains(url)
         if documentAlreadyOpen {
             // Get the existing document matching the url.
             for (index, tuple) in managedDocuments.enumerated() {
-                if tuple.document.fileURL == resolvedURL {
+                if tuple.document.fileURL == url {
                     managedDocuments[index].presenters.insert(presenterUUID)
                     completionHandler(tuple.document)
                     return
