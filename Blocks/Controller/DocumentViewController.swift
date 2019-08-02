@@ -184,10 +184,10 @@ extension DocumentViewController {
         print("❇️Add button Pressed. New block UUID: \(block.uuid). Time: \(Date())")
         
         let addedBlockIndex = document.getNumberOfBlocks()
-        document.undoManager.undoablyDo({ [unowned self] in
-            self.document.addBlock(block)
-        }, undoClosure: { [unowned self] in
-            self.document.deleteBlock(at: addedBlockIndex, addToDeletedUUIDs: false)
+        document.undoManager.undoablyDo({ [document] in
+            document!.addBlock(block)
+        }, undoClosure: { [document] in
+            document!.deleteBlock(at: addedBlockIndex, addToDeletedUUIDs: false)
         })
         
     }
@@ -234,11 +234,11 @@ extension DocumentViewController {
         guard let block = document.getBlock(at: index) else { fatalError() }
         print("❌deleteMenuItemTapped index=\(index) UUID=\(block.uuid)")
         
-        document.undoManager.undoablyDo({ [unowned self] in
-            self.document.deleteBlock(at: index)
-        }, undoClosure: { [unowned self] in
-            self.document.removeDeletedUUID(uuid: block.uuid)
-            self.document.addBlock(block, atIndex: index)
+        document.undoManager.undoablyDo({ [document] in
+            document!.deleteBlock(at: index)
+        }, undoClosure: { [document] in
+            document!.removeDeletedUUID(uuid: block.uuid)
+            document!.addBlock(block, atIndex: index)
         })
         
         
@@ -255,10 +255,10 @@ extension DocumentViewController {
         
         let currentUsesRoundedCorners = lastTappedBlockView.usesRoundedCorners
         
-        document.undoManager.undoablyDo({ [unowned self] in
-            self.document.setBlockUsesRoundedCorners(at: index, !currentUsesRoundedCorners)
-        }, undoClosure: { [unowned self] in
-            self.document.setBlockUsesRoundedCorners(at: index, currentUsesRoundedCorners)
+        document.undoManager.undoablyDo({ [document] in
+            document!.setBlockUsesRoundedCorners(at: index, !currentUsesRoundedCorners)
+        }, undoClosure: { [document] in
+            document!.setBlockUsesRoundedCorners(at: index, currentUsesRoundedCorners)
         })
         
         self.lastTappedBlockView = nil
